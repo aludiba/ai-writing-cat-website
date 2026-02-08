@@ -269,10 +269,44 @@
         .back-top { display: inline-block; margin-bottom: 1.5rem; color: var(--primary); text-decoration: none; font-weight: 500; }
         .back-top:hover { text-decoration: underline; }
 
-        /* Contact */
-        .contact { background: var(--bg-light); text-align: center; }
-        .contact p { color: var(--text-muted); margin-bottom: 0.5rem; }
-        .contact a { color: var(--primary); text-decoration: none; font-weight: 500; }
+        /* Support */
+        .support { background: var(--bg-light); }
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .support-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            text-align: center;
+        }
+        .support-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .support-card h3 { font-size: 1.15rem; margin-bottom: 0.75rem; color: var(--text); }
+        .support-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 0.5rem; }
+        .support-card .qq-number {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.5rem 1.5rem;
+            background: var(--bg-gradient);
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            letter-spacing: 1px;
+            user-select: all;
+        }
+        .support-card a { color: var(--primary); text-decoration: none; font-weight: 500; }
+        .support-card a:hover { text-decoration: underline; }
+        .support-faq { max-width: 720px; margin: 2.5rem auto 0; text-align: left; }
+        .faq-item { margin-bottom: 1.25rem; }
+        .faq-item h4 { font-size: 1rem; color: var(--text); margin-bottom: 0.35rem; }
+        .faq-item p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
 
         @media (max-width: 768px) {
             .nav { padding: 0.75rem 1rem; }
@@ -288,7 +322,7 @@
         <ul class="nav-links">
             <li><a href="#features">功能</a></li>
             <li><a href="#about">关于</a></li>
-            <li><a href="#contact">联系我们</a></li>
+            <li><a href="#contact">技术支持</a></li>
             <li><a href="user-agreement.html">用户协议</a></li>
             <li><a href="privacy-policy.html">隐私政策</a></li>
         </ul>
@@ -416,10 +450,42 @@
         </div>
     </section>
 
-    <section class="section contact" id="contact">
-        <h2 class="section-title">联系我们</h2>
-        <p>如有问题或建议，欢迎通过应用内反馈功能与我们联系。</p>
-        <p><a href="https://apps.apple.com/app/id6755778624" target="_blank" rel="noopener">前往 App Store 下载 AI创作喵</a></p>
+    <section class="section support" id="contact">
+        <h2 class="section-title">技术支持与帮助</h2>
+        <div class="support-grid">
+            <div class="support-card">
+                <div class="icon">💬</div>
+                <h3>QQ 技术支持群</h3>
+                <p>如果您在使用过程中遇到任何问题、需要帮助或有功能建议，欢迎加入我们的 QQ 技术支持群，群内有工作人员为您解答。</p>
+                <div class="qq-number">319539849</div>
+                <p style="margin-top: 0.75rem; font-size: 0.9rem;">（复制群号，在 QQ 中搜索加入）</p>
+            </div>
+            <div class="support-card">
+                <div class="icon">📱</div>
+                <h3>应用内联系客服</h3>
+                <p>打开 AI创作喵 App，前往「设置 → 联系客服」，即可查看 QQ 群二维码并一键加入技术支持群，与客服人员直接沟通。</p>
+                <p><a href="https://apps.apple.com/app/id6755778624" target="_blank" rel="noopener">前往 App Store 下载 AI创作喵</a></p>
+            </div>
+        </div>
+        <div class="support-faq">
+            <h3 style="text-align:center; margin-bottom:1.5rem; color:var(--text);">常见问题</h3>
+            <div class="faq-item">
+                <h4>Q：如何恢复已购买的订阅或字数包？</h4>
+                <p>A：打开 App，前往「设置 → 会员特权」页面，点击「恢复购买」按钮即可恢复您之前通过同一 Apple ID 购买的所有订阅和字数包。</p>
+            </div>
+            <div class="faq-item">
+                <h4>Q：如何取消自动续订？</h4>
+                <p>A：前往 iPhone「设置 → Apple ID → 订阅」，找到 AI创作喵 对应的订阅项，点击取消即可。取消后，当前订阅期内仍可正常使用。</p>
+            </div>
+            <div class="faq-item">
+                <h4>Q：字数包有效期是多久？</h4>
+                <p>A：字数包有效期为 90 天，从购买成功时开始计算。建议根据实际创作需求合理购买。</p>
+            </div>
+            <div class="faq-item">
+                <h4>Q：遇到问题如何获取帮助？</h4>
+                <p>A：您可以加入我们的 QQ 技术支持群（群号：319539849），群内有工作人员为您提供一对一的技术支持与帮助。</p>
+            </div>
+        </div>
     </section>
 
     <footer class="footer">
@@ -437,8 +503,10 @@
                     </ul>
                 </div>
                 <div>
-                    <h4>联系我们</h4>
+                    <h4>技术支持</h4>
                     <ul>
+                        <li><a href="#contact">技术支持与帮助</a></li>
+                        <li>QQ 技术支持群：319539849</li>
                         <li><a href="#contact">应用内反馈</a></li>
                         <li><a href="https://apps.apple.com/app/id6755778624" target="_blank" rel="noopener">App Store 下载</a></li>
                     </ul>
@@ -486,7 +554,7 @@
         (function() {
             var navLinks = document.querySelectorAll('.nav-links a, .footer a[href^="#"], a.logo');
             var legalSections = document.querySelectorAll('.legal-section');
-            var mainSections = document.querySelectorAll('.hero, .screenshots, .testimonials-sec, .features, .why, .about, .contact, .footer');
+            var mainSections = document.querySelectorAll('.hero, .screenshots, .testimonials-sec, .features, .why, .about, .support, .footer');
 
             function showMain() {
                 mainSections.forEach(function(el) { el.style.display = ''; });
