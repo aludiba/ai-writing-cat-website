@@ -10,6 +10,9 @@ website-deploy/
 ├── user-agreement.html     # 用户协议页面
 ├── privacy-policy.html     # 隐私政策页面
 ├── auto-renew-agreement.html # 自动续费服务协议页面
+├── stellaai/               # 星恋AI 法务页面（复用同域名）
+│   ├── user-agreement.html # 星恋AI 用户协议
+│   └── privacy-policy.html # 星恋AI 隐私政策
 ├── images/                 # 图片资源目录
 │   ├── screenshot1.png
 │   ├── screenshot2.png
@@ -45,6 +48,8 @@ rsync -avz website-deploy/ user@your-server:/path/to/website/
    - 用户协议：`https://hujiaofenwritingcat.top/user-agreement.html`
    - 隐私政策：`https://hujiaofenwritingcat.top/privacy-policy.html`
    - 自动续费服务协议：`https://hujiaofenwritingcat.top/auto-renew-agreement.html`
+   - 星恋AI 用户协议：`https://hujiaofenwritingcat.top/stellaai/user-agreement.html`
+   - 星恋AI 隐私政策：`https://hujiaofenwritingcat.top/stellaai/privacy-policy.html`
 3. 确认图片正常显示
 4. 测试移动端访问
 
