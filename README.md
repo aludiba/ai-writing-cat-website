@@ -12,7 +12,8 @@ website-deploy/
 ├── auto-renew-agreement.html # 自动续费服务协议页面
 ├── stellaai/               # 星恋AI 法务页面（复用同域名）
 │   ├── user-agreement.html # 星恋AI 用户协议
-│   └── privacy-policy.html # 星恋AI 隐私政策
+│   ├── privacy-policy.html # 星恋AI 隐私政策
+│   └── auto-renew-agreement.html # 星恋AI 自动续费服务协议
 ├── images/                 # 图片资源目录
 │   ├── screenshot1.png
 │   ├── screenshot2.png
