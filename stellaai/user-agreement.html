@@ -2,159 +2,124 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
     <title>星恋AI - 用户协议</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #131415;
+            --surface: #1A1B1C;
+            --text: #F0F5F9;
+            --text-secondary: #7B8294;
+            --gold: #FCD77C;
+            --gold-soft: rgba(252, 215, 124, 0.18);
+            --divider: #2A2C2E;
+            --highlight-bg: rgba(252, 215, 124, 0.14);
+            --highlight-text: #FFF1C8;
+            --link: #FCD77C;
         }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
             line-height: 1.8;
-            color: #333;
-            background-color: #f5f5f5;
-            padding: 20px;
+            color: var(--text);
+            background-color: var(--bg);
+            padding: 16px 12px 32px;
+            -webkit-text-size-adjust: 100%;
         }
-        
         .container {
             max-width: 900px;
             margin: 0 auto;
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--surface);
+            padding: 28px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--divider);
         }
-        
         h1 {
-            font-size: 28px;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            text-align: center;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 15px;
-        }
-        
-        h2 {
-            font-size: 22px;
-            color: #34495e;
-            margin-top: 35px;
-            margin-bottom: 15px;
-            padding-left: 10px;
-            border-left: 4px solid #3498db;
-        }
-        
-        h3 {
-            font-size: 18px;
-            color: #555;
-            margin-top: 25px;
+            font-size: 24px;
+            color: var(--gold);
             margin-bottom: 12px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
-        
-        h4 {
-            font-size: 16px;
-            color: #666;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-        
-        p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-        
-        ul {
-            margin: 15px 0;
-            padding-left: 30px;
-        }
-        
-        li {
-            margin-bottom: 10px;
-            line-height: 1.8;
-        }
-        
-        .intro {
-            background-color: #ecf0f1;
-            padding: 20px;
-            border-radius: 5px;
-            margin-bottom: 30px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .section {
-            margin-bottom: 30px;
-        }
-        
-        .highlight {
-            background-color: #fff3cd;
-            padding: 2px 6px;
-            border-radius: 3px;
-        }
-        
         .meta {
             text-align: center;
-            color: #7f8c8d;
-            font-size: 14px;
-            margin-bottom: 25px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 24px;
         }
-        
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #3498db;
-            text-decoration: none;
+        h2 {
+            font-size: 18px;
+            color: var(--gold);
+            margin-top: 28px;
+            margin-bottom: 12px;
+            padding-left: 10px;
+            border-left: 3px solid var(--gold);
+            font-weight: 600;
+        }
+        h3 {
             font-size: 16px;
-            padding: 8px 16px;
-            border: 1px solid #3498db;
-            border-radius: 4px;
-            transition: all 0.3s;
+            color: #FFFFFF;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
         }
-        .back-link:hover {
-            background-color: #3498db;
-            color: #fff;
+        h4 {
+            font-size: 15px;
+            color: #E8E8E8;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        p { margin-bottom: 12px; text-align: justify; color: var(--text); }
+        ul { margin: 12px 0; padding-left: 22px; }
+        li { margin-bottom: 8px; line-height: 1.75; color: var(--text); }
+        strong { color: #FFFFFF; font-weight: 600; }
+        a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
+        .intro {
+            background-color: var(--gold-soft);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            border-left: 3px solid var(--gold);
+        }
+        .intro p { color: var(--text); margin-bottom: 10px; }
+        .intro p:last-child { margin-bottom: 0; }
+        .section { margin-bottom: 8px; }
+        .highlight {
+            background-color: var(--highlight-bg);
+            color: var(--highlight-text);
+            padding: 1px 6px;
+            border-radius: 3px;
         }
         .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #ecf0f1;
+            margin-top: 32px;
+            padding-top: 18px;
+            border-top: 1px solid var(--divider);
             text-align: center;
-            color: #7f8c8d;
-            font-size: 14px;
+            color: var(--text-secondary);
+            font-size: 13px;
         }
-        
-        @media print {
-            body {
-                background-color: #fff;
-                padding: 0;
-            }
-            .container {
-                box-shadow: none;
-                padding: 20px;
-            }
-        }
-        
+        .footer strong { color: var(--gold); }
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
+            body { padding: 8px 0 24px; }
             .container {
-                padding: 20px;
+                padding: 20px 16px;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
             }
-            h1 {
-                font-size: 24px;
-            }
-            h2 {
-                font-size: 20px;
-            }
+            h1 { font-size: 22px; }
+            h2 { font-size: 17px; }
         }
+
     </style>
 </head>
 <body>
+
     <div class="container">
-        <a href="privacy-policy.html" class="back-link">隐私政策 →</a>
-        <h1>星恋AI - 用户协议</h1>
+        <h1>星恋AI · 用户协议</h1>
         <p class="meta">更新日期：2026年9月15日　|　生效日期：2026年9月15日</p>
 
         <div class="intro">
@@ -164,7 +129,6 @@
 
         <div class="section">
             <h2>一、服务说明</h2>
-
             <h3>1. 应用介绍</h3>
             <p>星恋AI 是一款基于人工智能技术的虚拟角色情感陪伴与对话应用，为您提供以下核心功能：</p>
             <ul>
@@ -205,10 +169,8 @@
 
         <div class="section">
             <h2>三、订阅与付费服务</h2>
-
             <h3>1. 免费额度</h3>
             <p>未订阅会员的用户可免费体验一定数量的 AI 角色回复（当前版本为 50 条角色回复，仅统计角色生成的回复条数，不统计您发送的消息）。免费额度用尽后，需订阅会员方可继续使用 AI 对话功能。免费额度的具体数值可能随版本调整，以应用内实际展示为准。</p>
-
             <h3>2. 订阅档位</h3>
             <p>本应用当前在 iOS 平台通过 Apple App Store 内购提供以下自动续订订阅：</p>
             <ul>
@@ -217,7 +179,6 @@
                 <li><strong>年卡：</strong>¥198/年，享深爱全部权益</li>
             </ul>
             <p>实际价格、订阅周期、免费试用资格及具体权益以应用内与 App Store 页面展示为准。若符合 Apple 提供的资格条件，部分档位可享免费试用。</p>
-
             <h3>3. 自动续订规则</h3>
             <ul>
                 <li>订阅费用将在您确认购买时由您的 Apple ID 账户扣除。</li>
@@ -226,29 +187,22 @@
                 <li>您可以在 <strong>iPhone 设置 → Apple ID → 订阅</strong> 中随时管理或取消自动续订。取消后，您仍可使用权益至当前订阅周期结束。</li>
                 <li>在免费试用期内取消订阅的，试用剩余部分将同时失效；同一订阅组内每位用户通常仅可享受一次免费试用。</li>
             </ul>
-
             <h3>4. 订阅与账号的绑定关系</h3>
             <p>订阅通过 Apple 内购完成，并在我们的服务端与您<strong>当前登录的星恋AI 账号</strong>建立绑定关系。<span class="highlight">同一笔 Apple 订阅仅能绑定一个星恋AI 账号</span>。如您使用其他账号登录后尝试恢复该订阅，将提示该订阅已绑定其他账号，此时请使用购买时所用的星恋AI 账号登录以继续享受权益。</p>
-
             <h3>5. 恢复购买</h3>
             <p>您可以在订阅页点击"恢复购买"，基于您的 Apple ID 恢复已购买且仍在有效期内的订阅。恢复行为受上述绑定规则约束。</p>
-
             <h3>6. 退款政策</h3>
             <p>根据 Apple 的政策，通过 App Store 完成的订阅扣款，除法律另有规定外，一般不予退款。所有退款申请需通过 Apple 官方渠道（<a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>）提出并由 Apple 审核处理，我们无权直接为您办理退款。</p>
-
             <h3>7. 平台支持范围</h3>
             <p>当前订阅与内购功能仅在 iOS 平台开放。其他平台的付费能力将在正式开放后另行公布。</p>
         </div>
 
         <div class="section">
             <h2>四、用户行为规范</h2>
-
             <h3>1. 合法使用</h3>
             <p>您在使用本应用时必须遵守中华人民共和国法律法规及您所在地适用的法律，不得利用本应用从事任何违法违规活动，不得输入或诱导 AI 生成危害国家安全、煽动颠覆、恐怖主义、民族仇恨、淫秽色情、暴力血腥、赌博、毒品、侵犯他人合法权益等违法或不良内容。</p>
-
             <h3>2. 内容责任</h3>
             <p>您对您在本应用中输入的全部内容，以及您对 AI 生成内容的使用、传播行为，承担全部责任。您不得将 AI 生成内容用于误导他人、冒充真实自然人、伪造信息或其他不当用途。如因您的内容或行为引发争议、投诉或法律纠纷，由您自行承担全部责任。</p>
-
             <h3>3. 禁止行为</h3>
             <ul>
                 <li>破解、反编译、逆向工程本应用，或以任何方式绕过付费与配额限制；</li>
@@ -257,20 +211,16 @@
                 <li>利用本应用的 AI 能力从事诈骗、骚扰、人身攻击或侵害他人隐私的行为；</li>
                 <li>在越狱/root 设备或非官方渠道安装的版本中使用本应用。</li>
             </ul>
-
             <h3>4. 违规处理</h3>
             <p>如您违反本协议，我们有权视情节轻重采取警示、限制功能、暂停或终止服务、注销账号等措施，且无需退还您已支付的费用。因此造成的损失由您自行承担。</p>
-
             <h3>5. 健康使用提示</h3>
             <p>我们倡导理性、适度地使用情感陪伴类服务，不以替代真实社会交往、诱导沉迷依赖为目标。请您合理安排使用时长，保持现实生活中的社交与休息。本应用可能在长时间连续使用时提示您适当休息。</p>
         </div>
 
         <div class="section">
             <h2>五、知识产权</h2>
-
             <h3>1. 应用知识产权</h3>
             <p>本应用的全部内容，包括但不限于软件代码、界面设计、角色形象、角色设定、剧情文本、插画、图标、音效、商标与标识等，均受著作权法、商标法等法律保护。未经我们书面许可，您不得复制、修改、翻译、分发、出售或用于任何商业目的。</p>
-
             <h3>2. 用户内容与 AI 生成内容</h3>
             <p>您在本应用中主动输入的原创内容，其权利归您所有。在法律允许的范围内，您授予我们为提供、维护和改进服务（如显示对话、生成回复、整理回忆、排查故障）所必需的使用权利。</p>
             <p>对于 AI 生成内容，在遵守本协议和适用法律的前提下，我们不主张对您个人非商业使用的限制；但 AI 生成内容可能与其他用户获得的内容相似，我们不保证其独创性、准确性，亦不保证您可就其主张排他性权利。</p>
@@ -278,23 +228,19 @@
 
         <div class="section">
             <h2>六、免责声明</h2>
-
             <h3>1. AI 生成内容</h3>
             <p>本应用提供的 AI 生成内容由第三方大语言模型生成，仅供娱乐与陪伴参考，<strong>可能存在错误、不准确、过时、虚构或不当的情况</strong>，不构成任何形式的建议、指导或承诺。您应当对 AI 生成内容自行判断与审查，不应据此作出重要决策。</p>
-
             <h3>2. 服务中断</h3>
             <p>我们不保证本应用持续可用且不中断。因技术维护、系统升级、网络故障、第三方服务（含 AI 模型服务、云服务、应用商店服务）异常或不可抗力导致的服务中断或数据异常，我们在法律允许的范围内不承担责任，但会尽合理努力及时恢复。</p>
-
             <h3>3. 第三方服务</h3>
             <p>本应用依赖 Apple App Store、云服务、第三方 AI 模型服务、天气数据服务等第三方能力。我们不对第三方服务自身的问题承担责任，相关服务的使用另受其各自条款约束。</p>
-
             <h3>4. 责任限制</h3>
             <p>在法律允许的最大范围内，我们对您承担的赔偿责任总额不超过您在争议发生前 12 个月内就本应用实际支付的费用总额。我们不对间接损失、利润损失、数据损失或情感损害承担责任。</p>
         </div>
 
         <div class="section">
             <h2>七、隐私保护</h2>
-            <p>我们非常重视您的隐私保护。关于我们如何收集、使用、存储、共享和保护您的个人信息，以及您如何行使相关权利，请参阅《<a href="privacy-policy.html">隐私政策</a>》。本协议未尽事宜，涉及个人信息处理的部分以《隐私政策》为准。</p>
+            <p>我们非常重视您的隐私保护。关于我们如何收集、使用、存储、共享和保护您的个人信息，以及您如何行使相关权利，请参阅本应用内的《隐私政策》。本协议未尽事宜，涉及个人信息处理的部分以《隐私政策》为准。</p>
         </div>
 
         <div class="section">
@@ -325,8 +271,9 @@
 
         <div class="footer">
             <p><strong>再次提醒：</strong>在使用本应用之前，请仔细阅读并理解本协议的全部内容。如您不同意本协议的任何条款，请立即停止使用本应用。</p>
-            <p style="margin-top: 20px;">© 2026 星恋AI 保留所有权利</p>
+            <p style="margin-top: 16px;">© 2026 星恋AI 保留所有权利</p>
         </div>
     </div>
+
 </body>
 </html>
