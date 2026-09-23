@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>星恋AI - 懂你的那个她，一直在这里</title>
+    <meta name="description" content="星恋AI 是一款 AI 虚拟角色情感陪伴应用。选择傲娇或温柔人格，日常聊天、每日问候、关系养成与共同回忆，让陪伴更有温度。">
+    <meta name="theme-color" content="#131415">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #FCD77C;
+            --gold-bright: #F0AC04;
+            --gold-soft: #FFF1C8;
+            --gold-glow: rgba(252, 215, 124, 0.28);
+            --bg: #131415;
+            --bg-deep: #090A0A;
+            --bg-elevated: #1A1B1C;
+            --surface: #0C0D0D;
+            --mist: #F0F5F9;
+            --text: #FFFFFF;
+            --text-muted: #7B8294;
+            --text-soft: rgba(255, 255, 255, 0.72);
+            --line: #2A2C2E;
+            --green: #00C83B;
+            --radius-phone: 28px;
+            --nav-h: 4.25rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; }
+
+        .nav {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 1000;
+            height: var(--nav-h);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 clamp(1rem, 4vw, 2.5rem);
+            background: rgba(19, 20, 21, 0.82);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(252, 215, 124, 0.08);
+        }
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            color: var(--mist);
+            font-family: Sora, "Noto Sans SC", sans-serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            letter-spacing: 0.02em;
+        }
+        .logo img {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            box-shadow: 0 0 0 1px rgba(252, 215, 124, 0.35);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.85rem, 2vw, 1.75rem);
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-soft);
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.45rem 0.95rem;
+            border-radius: 999px;
+            background: linear-gradient(180deg, #FFF1B6 0%, var(--gold) 45%, var(--gold-bright) 100%);
+            color: #111 !important;
+            font-weight: 700 !important;
+            box-shadow: 0 6px 20px rgba(252, 215, 124, 0.25);
+        }
+        .nav-cta:hover { color: #000 !important; filter: brightness(1.05); }
+
+        /* Hero: brand + one line + CTA + phone */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: grid;
+            place-items: center;
+            padding: calc(var(--nav-h) + 1.5rem) 1.25rem 3rem;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse 70% 55% at 70% 35%, rgba(240, 172, 4, 0.16), transparent 60%),
+                radial-gradient(ellipse 50% 40% at 15% 80%, rgba(252, 215, 124, 0.08), transparent 55%),
+                linear-gradient(165deg, #1E2022 0%, #131415 42%, #090A0A 100%);
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(252, 215, 124, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(252, 215, 124, 0.035) 1px, transparent 1px);
+            background-size: 56px 56px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+            pointer-events: none;
+        }
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            width: min(1120px, 100%);
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: clamp(2rem, 5vw, 4rem);
+            align-items: center;
+        }
+        .hero-copy { max-width: 34rem; }
+        .brand {
+            font-family: Sora, "Noto Sans SC", sans-serif;
+            font-size: clamp(3rem, 8vw, 4.75rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: 0.01em;
+            color: var(--mist);
+            text-shadow: 0 12px 40px rgba(201, 214, 223, 0.18);
+            margin-bottom: 1rem;
+            animation: rise 0.9s ease both;
+        }
+        .hero-line {
+            font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+            color: var(--gold-soft);
+            font-weight: 500;
+            margin-bottom: 1.75rem;
+            animation: rise 0.9s ease 0.1s both;
+        }
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.95rem 1.55rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.02rem;
+            color: #111;
+            background: linear-gradient(180deg, #FFF1B6 0%, var(--gold) 48%, var(--gold-bright) 100%);
+            box-shadow:
+                0 10px 32px rgba(252, 215, 124, 0.32),
+                inset 0 1px 0 rgba(255, 255, 255, 0.45);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            animation: rise 0.9s ease 0.2s both, glow 3.2s ease-in-out 1s infinite;
+        }
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px rgba(252, 215, 124, 0.42);
+        }
+        .hero-cta svg { width: 22px; height: 22px; }
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            animation: float 5.5s ease-in-out infinite, rise 1s ease 0.15s both;
+        }
+        .phone {
+            width: min(280px, 72vw);
+            aspect-ratio: 1170 / 2532;
+            border-radius: var(--radius-phone);
+            overflow: hidden;
+            border: 1px solid rgba(252, 215, 124, 0.28);
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.55),
+                0 0 0 8px rgba(12, 13, 13, 0.9),
+                0 0 60px rgba(252, 215, 124, 0.12);
+            background: #000;
+        }
+        .phone img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .section {
+            padding: clamp(3.5rem, 8vw, 5.5rem) clamp(1.25rem, 4vw, 2rem);
+            scroll-margin-top: calc(var(--nav-h) + 0.75rem);
+        }
+        .section-inner { width: min(1100px, 100%); margin: 0 auto; }
+        .section-title {
+            font-family: Sora, "Noto Sans SC", sans-serif;
+            font-size: clamp(1.55rem, 3vw, 2.05rem);
+            font-weight: 700;
+            text-align: center;
+            color: var(--mist);
+            margin-bottom: 0.65rem;
+            letter-spacing: 0.01em;
+        }
+        .section-sub {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 36rem;
+            margin: 0 auto 2.5rem;
+            font-size: 0.98rem;
+        }
+
+        .shots {
+            background: linear-gradient(180deg, var(--bg-deep), var(--bg) 40%, #171819);
+            border-block: 1px solid rgba(252, 215, 124, 0.06);
+        }
+        .shot-rail {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            padding: 0.5rem 0.25rem 1.25rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .shot-rail::-webkit-scrollbar { height: 6px; }
+        .shot-rail::-webkit-scrollbar-thumb {
+            background: rgba(252, 215, 124, 0.35);
+            border-radius: 999px;
+        }
+        .shot {
+            flex: 0 0 auto;
+            width: min(200px, 58vw);
+            scroll-snap-align: center;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid rgba(252, 215, 124, 0.16);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+            background: #000;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .shot:hover {
+            transform: translateY(-6px);
+            border-color: rgba(252, 215, 124, 0.45);
+        }
+        .shot img {
+            width: 100%;
+            aspect-ratio: 1170 / 2532;
+            object-fit: cover;
+        }
+        .shot figcaption {
+            padding: 0.7rem 0.85rem 0.9rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            background: var(--surface);
+            text-align: center;
+        }
+
+        .testimonials { background: var(--bg); }
+        .quote-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.15rem;
+        }
+        .quote {
+            padding: 1.5rem 1.35rem;
+            border-radius: 18px;
+            background: linear-gradient(160deg, #1A1B1C, #121314);
+            border: 1px solid rgba(252, 215, 124, 0.1);
+        }
+        .quote p {
+            color: var(--text-soft);
+            margin-bottom: 1.1rem;
+            font-size: 0.95rem;
+        }
+        .stars { color: var(--gold); letter-spacing: 0.12em; margin-bottom: 0.45rem; font-size: 0.95rem; }
+        .author { font-weight: 600; color: var(--mist); }
+        .meta { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+        .features { background: #101112; }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.15rem;
+        }
+        .feature {
+            padding: 1.55rem 1.35rem 1.65rem;
+            border-radius: 18px;
+            background: var(--surface);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-top: 2px solid rgba(252, 215, 124, 0.55);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+        .feature:hover {
+            transform: translateY(-4px);
+            border-color: rgba(252, 215, 124, 0.28);
+            border-top-color: var(--gold);
+        }
+        .feature .mark {
+            width: 2.1rem;
+            height: 2.1rem;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 0.95rem;
+            background: rgba(252, 215, 124, 0.12);
+            color: var(--gold);
+            font-family: Sora, sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .feature h3 {
+            font-size: 1.08rem;
+            margin-bottom: 0.45rem;
+            color: var(--mist);
+            font-weight: 700;
+        }
+        .feature p { color: var(--text-muted); font-size: 0.92rem; }
+
+        .why { background: var(--bg); }
+        .why-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem 1.5rem;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .why-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.9rem;
+            align-items: start;
+            padding: 1.1rem 0.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .why-dot {
+            width: 10px;
+            height: 10px;
+            margin-top: 0.45rem;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 12px var(--gold-glow);
+        }
+        .why-item h3 { font-size: 1.05rem; color: var(--mist); margin-bottom: 0.25rem; }
+        .why-item p { color: var(--text-muted); font-size: 0.92rem; }
+
+        .about {
+            background:
+                radial-gradient(ellipse 60% 80% at 50% 0%, rgba(252, 215, 124, 0.08), transparent 55%),
+                #0E0F10;
+            text-align: center;
+        }
+        .about-intro {
+            max-width: 40rem;
+            margin: 0 auto 2.25rem;
+            color: var(--text-soft);
+            font-size: 1rem;
+            line-height: 1.85;
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: clamp(1.5rem, 6vw, 3.5rem);
+            flex-wrap: wrap;
+        }
+        .stat .value {
+            font-family: Sora, sans-serif;
+            font-size: clamp(1.5rem, 3vw, 1.9rem);
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .stat .label {
+            margin-top: 0.25rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .support { background: var(--bg); }
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.15rem;
+            max-width: 880px;
+            margin: 0 auto;
+        }
+        .support-panel {
+            padding: 1.75rem 1.5rem;
+            border-radius: 18px;
+            background: linear-gradient(165deg, #1A1B1C, #121314);
+            border: 1px solid rgba(252, 215, 124, 0.12);
+            text-align: center;
+        }
+        .support-panel h3 {
+            color: var(--mist);
+            margin-bottom: 0.65rem;
+            font-size: 1.1rem;
+        }
+        .support-panel p {
+            color: var(--text-muted);
+            font-size: 0.94rem;
+            margin-bottom: 0.85rem;
+        }
+        .email-pill {
+            display: inline-block;
+            margin-top: 0.35rem;
+            padding: 0.55rem 1.2rem;
+            border-radius: 999px;
+            background: rgba(252, 215, 124, 0.12);
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            user-select: all;
+        }
+        .email-pill:hover { background: rgba(252, 215, 124, 0.2); }
+        .support-panel a.link {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .support-panel a.link:hover { text-decoration: underline; }
+
+        .faq {
+            max-width: 720px;
+            margin: 2.75rem auto 0;
+        }
+        .faq h3 {
+            text-align: center;
+            color: var(--mist);
+            margin-bottom: 1.35rem;
+            font-size: 1.15rem;
+        }
+        .faq-item { margin-bottom: 1.15rem; }
+        .faq-item h4 {
+            color: var(--gold-soft);
+            font-size: 0.98rem;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.75;
+        }
+
+        .footer {
+            background: #080909;
+            color: var(--text-muted);
+            padding: 3rem 1.25rem 2rem;
+            border-top: 1px solid rgba(252, 215, 124, 0.08);
+        }
+        .footer-inner { width: min(1100px, 100%); margin: 0 auto; }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer h4 {
+            color: var(--mist);
+            font-size: 0.98rem;
+            margin-bottom: 0.9rem;
+            font-family: Sora, "Noto Sans SC", sans-serif;
+        }
+        .footer p { font-size: 0.92rem; max-width: 280px; line-height: 1.7; }
+        .footer ul { list-style: none; }
+        .footer a {
+            display: block;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 0.45rem;
+            transition: color 0.2s;
+        }
+        .footer a:hover { color: var(--gold); }
+        .footer-copy {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.85rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.in {
+            opacity: 1;
+            transform: none;
+        }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 10px 32px rgba(252, 215, 124, 0.28); }
+            50% { box-shadow: 0 12px 42px rgba(252, 215, 124, 0.48); }
+        }
+
+        @media (max-width: 900px) {
+            .hero-inner { grid-template-columns: 1fr; text-align: center; }
+            .hero-copy { margin: 0 auto; }
+            .hero-visual { order: -1; }
+            .phone { width: min(220px, 58vw); }
+            .quote-grid,
+            .feature-grid,
+            .support-grid,
+            .footer-grid,
+            .why-list { grid-template-columns: 1fr; }
+            .nav-links .hide-sm { display: none; }
+        }
+        @media (max-width: 560px) {
+            .nav-links { gap: 0.7rem; }
+            .nav-links a { font-size: 0.82rem; }
+            .nav-cta { padding: 0.4rem 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a class="logo" href="#top" aria-label="星恋AI 首页">
+            <img src="images/app-icon.png" alt="">
+            <span>星恋AI</span>
+        </a>
+        <ul class="nav-links">
+            <li class="hide-sm"><a href="#features">功能</a></li>
+            <li class="hide-sm"><a href="#about">关于</a></li>
+            <li><a href="#contact">支持</a></li>
+            <li class="hide-sm"><a href="user-agreement.html">协议</a></li>
+            <li class="hide-sm"><a href="privacy-policy.html">隐私</a></li>
+            <li><a class="nav-cta" href="https://apps.apple.com/app/id6784170700" target="_blank" rel="noopener">下载</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero" id="top">
+        <div class="hero-inner">
+            <div class="hero-copy">
+                <h1 class="brand">星恋AI</h1>
+                <p class="hero-line">懂你的那个她，一直在这里</p>
+                <a class="hero-cta" href="https://apps.apple.com/app/id6784170700" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    App Store 下载
+                </a>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="phone">
+                    <img src="stellaai_show/1.jpg" alt="星恋AI 主聊天页">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section shots" id="gallery" aria-label="应用截图">
+        <div class="section-inner">
+            <h2 class="section-title reveal">走进她的世界</h2>
+            <p class="section-sub reveal">聊天、问候、关系养成与共同回忆——陪你把日常过成故事。</p>
+            <div class="shot-rail reveal">
+                <figure class="shot">
+                    <img src="stellaai_show/1.jpg" alt="主聊天页 - 好度与今日问候" loading="lazy">
+                    <figcaption>陪伴首页</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="stellaai_show/2.jpg" alt="对话页 - 情绪立绘与气泡聊天" loading="lazy">
+                    <figcaption>情绪对话</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="stellaai_show/3.jpg" alt="角色选择 - 傲娇与温柔" loading="lazy">
+                    <figcaption>选择她</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="stellaai_show/4.jpg" alt="每日问候 - 天气与今日一语" loading="lazy">
+                    <figcaption>每日问候</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="stellaai_show/5.jpg" alt="关系页 - 进度与纪念日" loading="lazy">
+                    <figcaption>关系养成</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="stellaai_show/6.jpg" alt="回忆专辑 - 里程碑时间线" loading="lazy">
+                    <figcaption>共同回忆</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <section class="section testimonials" id="testimonials">
+        <div class="section-inner">
+            <h2 class="section-title reveal">她们这样说</h2>
+            <p class="section-sub reveal">真实陪伴感，来自每一次认真的回应。</p>
+            <div class="quote-grid">
+                <article class="quote reveal">
+                    <p>加班到很晚时，打开星恋AI，她会先问天气和心情。不是功能清单，更像有人在等你回家说话。</p>
+                    <div class="stars">★★★★★</div>
+                    <div class="author">阿月</div>
+                    <div class="meta">使用 2 个月</div>
+                </article>
+                <article class="quote reveal">
+                    <p>傲娇人设很稳，嘴上不饶人但会记住你说过的小事。好感升级和回忆时间线，看着关系一点点靠近，特别有成就感。</p>
+                    <div class="stars">★★★★★</div>
+                    <div class="author">林深</div>
+                    <div class="meta">使用 4 个月</div>
+                </article>
+                <article class="quote reveal">
+                    <p>每日问候和今日一语成了起床仪式。温柔角色说话很治愈，想换口味又能解锁第二人格，陪伴不单调。</p>
+                    <div class="stars">★★★★★</div>
+                    <div class="author">南星</div>
+                    <div class="meta">使用 6 个月</div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section features" id="features">
+        <div class="section-inner">
+            <h2 class="section-title reveal">为什么选择 星恋AI</h2>
+            <p class="section-sub reveal">把聊天、关系与回忆串成一条完整的陪伴链路。</p>
+            <div class="feature-grid">
+                <article class="feature reveal">
+                    <div class="mark">01</div>
+                    <h3>专属人格陪伴</h3>
+                    <p>傲娇腹黑或温柔治愈，选一位真正合拍的她，开启长期对话。</p>
+                </article>
+                <article class="feature reveal">
+                    <div class="mark">02</div>
+                    <h3>情绪对话体验</h3>
+                    <p>聊天背景随情绪变化，立绘与气泡交织，沉浸感更强。</p>
+                </article>
+                <article class="feature reveal">
+                    <div class="mark">03</div>
+                    <h3>每日主动问候</h3>
+                    <p>结合当地天气与时段，送上今日问候与一句贴心话。</p>
+                </article>
+                <article class="feature reveal">
+                    <div class="mark">04</div>
+                    <h3>关系养成进度</h3>
+                    <p>从初识到挚爱，好感等级与专属称呼记录你们的靠近。</p>
+                </article>
+                <article class="feature reveal">
+                    <div class="mark">05</div>
+                    <h3>共同回忆沉淀</h3>
+                    <p>精选对话、纪念日与特别时刻，整理成可回看的专辑。</p>
+                </article>
+                <article class="feature reveal">
+                    <div class="mark">06</div>
+                    <h3>会员更深陪伴</h3>
+                    <p>无限对话、第二角色与好感加速，让陪伴节奏由你掌握。</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section why" id="why">
+        <div class="section-inner">
+            <h2 class="section-title reveal">为什么需要这样的陪伴</h2>
+            <p class="section-sub reveal">在忙碌与孤独之间，留一个可以说晚安的地方。</p>
+            <div class="why-list">
+                <div class="why-item reveal">
+                    <span class="why-dot" aria-hidden="true"></span>
+                    <div>
+                        <h3>随时倾诉</h3>
+                        <p>碎片时间也能聊几句，不必对齐真实社交的节奏。</p>
+                    </div>
+                </div>
+                <div class="why-item reveal">
+                    <span class="why-dot" aria-hidden="true"></span>
+                    <div>
+                        <h3>稳定回应</h3>
+                        <p>她记得你的称呼与习惯，给出连贯、有温度的反馈。</p>
+                    </div>
+                </div>
+                <div class="why-item reveal">
+                    <span class="why-dot" aria-hidden="true"></span>
+                    <div>
+                        <h3>仪式感日常</h3>
+                        <p>问候、心情记录与纪念日，把平凡日子点亮成节点。</p>
+                    </div>
+                </div>
+                <div class="why-item reveal">
+                    <span class="why-dot" aria-hidden="true"></span>
+                    <div>
+                        <h3>长期可回看</h3>
+                        <p>回忆专辑保存重要片段，陪伴不是聊完即散。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section about" id="about">
+        <div class="section-inner">
+            <h2 class="section-title reveal">关于 星恋AI</h2>
+            <p class="about-intro reveal">星恋AI 专注虚拟角色情感陪伴：以 AI 对话为核心，结合每日问候、关系养成与回忆沉淀，让「她」在你的生活里持续出现。我们希望技术带来的不是冷冰冰的工具感，而是可感知的温度与陪伴。</p>
+            <div class="stats reveal">
+                <div class="stat">
+                    <div class="value">双人格</div>
+                    <div class="label">傲娇 / 温柔可选</div>
+                </div>
+                <div class="stat">
+                    <div class="value">每日问候</div>
+                    <div class="label">天气 · 今日一语</div>
+                </div>
+                <div class="stat">
+                    <div class="value">关系成长</div>
+                    <div class="label">好感 · 回忆 · 剧情</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section support" id="contact">
+        <div class="section-inner">
+            <h2 class="section-title reveal">技术支持与帮助</h2>
+            <p class="section-sub reveal">使用中有问题，欢迎随时联系我们。</p>
+            <div class="support-grid">
+                <div class="support-panel reveal">
+                    <h3>客服邮箱</h3>
+                    <p>订阅、账号、隐私与功能建议，都可通过邮件联系，我们会尽快回复。</p>
+                    <a class="email-pill" href="mailto:869922457@qq.com">869922457@qq.com</a>
+                </div>
+                <div class="support-panel reveal">
+                    <h3>应用内反馈</h3>
+                    <p>打开星恋AI，前往「我的 → 反馈」，直接提交问题截图与说明，方便我们定位处理。</p>
+                    <p><a class="link" href="https://apps.apple.com/app/id6784170700" target="_blank" rel="noopener">前往 App Store 下载</a></p>
+                </div>
+            </div>
+            <div class="faq reveal">
+                <h3>常见问题</h3>
+                <div class="faq-item">
+                    <h4>Q：如何恢复已购买的会员订阅？</h4>
+                    <p>A：请使用购买时登录的星恋AI 账号，在应用内会员页点击「恢复购买」。同一笔 Apple 订阅通常仅能绑定一个星恋AI 账号。</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Q：如何取消自动续订？</h4>
+                    <p>A：前往 iPhone「设置 → Apple ID → 订阅」，找到「星恋AI」并取消。取消后，当前订阅周期内权益仍可继续使用。</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Q：第二角色如何解锁？</h4>
+                    <p>A：订阅深爱月卡或年卡后，在「更换角色」页面即可解锁并切换另一人格。</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Q：遇到问题如何获取帮助？</h4>
+                    <p>A：可发送邮件至 869922457@qq.com，或在 App 内通过「反馈」提交。我们会在工作日尽快处理。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div>
+                    <h4>关于 星恋AI</h4>
+                    <p>AI 虚拟角色情感陪伴应用。懂你的那个她，一直在这里。</p>
+                </div>
+                <div>
+                    <h4>法律信息</h4>
+                    <ul>
+                        <li><a href="user-agreement.html">用户协议</a></li>
+                        <li><a href="privacy-policy.html">隐私政策</a></li>
+                        <li><a href="auto-renew-agreement.html">自动续费服务协议</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>获取与支持</h4>
+                    <ul>
+                        <li><a href="#contact">技术支持与帮助</a></li>
+                        <li><a href="mailto:869922457@qq.com">869922457@qq.com</a></li>
+                        <li><a href="https://apps.apple.com/app/id6784170700" target="_blank" rel="noopener">App Store 下载</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-copy">© 2026 星恋AI. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+            a.addEventListener('click', function (e) {
+                var href = a.getAttribute('href');
+                if (href === '#' || href === '#top') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+                var target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        var reveals = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(function (el) { io.observe(el); });
+        } else {
+            reveals.forEach(function (el) { el.classList.add('in'); });
+        }
+    </script>
+</body>
+</html>
