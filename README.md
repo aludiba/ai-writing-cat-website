@@ -15,6 +15,14 @@ website-deploy/
 │   ├── user-agreement.html # 星恋AI 用户协议
 │   ├── privacy-policy.html # 星恋AI 隐私政策
 │   ├── auto-renew-agreement.html # 星恋AI 自动续费服务协议
+│   ├── en/                 # English legal pages (Stella AI)
+│   │   ├── user-agreement.html
+│   │   ├── privacy-policy.html
+│   │   └── auto-renew-agreement.html
+│   ├── es/                 # Spanish legal pages
+│   ├── fr/                 # French legal pages
+│   ├── ja/                 # Japanese legal pages
+│   ├── ko/                 # Korean legal pages
 │   ├── images/             # Logo / favicon
 │   └── stellaai_show/      # App 展示截图
 └── README.md               # 本文件
@@ -49,9 +57,19 @@ rsync -avz website-deploy/ user@your-server:/path/to/website/
    - 隐私政策：`https://hujiaofenwritingcat.top/privacy-policy.html`
    - 自动续费服务协议：`https://hujiaofenwritingcat.top/auto-renew-agreement.html`
   - 星恋AI 官网：`https://hujiaofenwritingcat.top/stellaai/`
-  - 星恋AI 用户协议：`https://hujiaofenwritingcat.top/stellaai/user-agreement.html`
-  - 星恋AI 隐私政策：`https://hujiaofenwritingcat.top/stellaai/privacy-policy.html`
-  - 星恋AI 自动续费：`https://hujiaofenwritingcat.top/stellaai/auto-renew-agreement.html`
+  - 星恋AI 用户协议：`https://hujiaofenwritingcat.top/stellaai/user-agreement.html`（中文）
+  - 星恋AI 隐私政策：`https://hujiaofenwritingcat.top/stellaai/privacy-policy.html`（中文）
+  - 星恋AI 自动续费：`https://hujiaofenwritingcat.top/stellaai/auto-renew-agreement.html`（中文）
+  - 英文法务：`https://hujiaofenwritingcat.top/stellaai/en/privacy-policy.html` 等（App Store 海外常用）
+  - 其它语言自动续费：`.../stellaai/{es,fr,ja,ko}/auto-renew-agreement.html`
+  - 说明：星恋AI 法务页已提供中文（根目录）及 en/es/fr/ja/ko 译文；App 按当前语言加载对应 HTML。
+  - Stella AI 英文用户协议：`https://hujiaofenwritingcat.top/stellaai/en/user-agreement.html`
+  - Stella AI 英文隐私政策：`https://hujiaofenwritingcat.top/stellaai/en/privacy-policy.html`
+  - Stella AI 英文自动续费：`https://hujiaofenwritingcat.top/stellaai/en/auto-renew-agreement.html`
+  - 西班牙语：`https://hujiaofenwritingcat.top/stellaai/es/privacy-policy.html`（同目录下 user-agreement.html、auto-renew-agreement.html）
+  - 法语：`https://hujiaofenwritingcat.top/stellaai/fr/privacy-policy.html`
+  - 日语：`https://hujiaofenwritingcat.top/stellaai/ja/privacy-policy.html`
+  - 韩语：`https://hujiaofenwritingcat.top/stellaai/ko/privacy-policy.html`
 3. 确认图片正常显示
 4. 测试移动端访问
 
