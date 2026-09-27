@@ -56,22 +56,33 @@ rsync -avz website-deploy/ user@your-server:/path/to/website/
    - 用户协议：`https://hujiaofenwritingcat.top/user-agreement.html`
    - 隐私政策：`https://hujiaofenwritingcat.top/privacy-policy.html`
    - 自动续费服务协议：`https://hujiaofenwritingcat.top/auto-renew-agreement.html`
-  - 星恋AI 官网：`https://hujiaofenwritingcat.top/stellaai/`
-  - 星恋AI 用户协议：`https://hujiaofenwritingcat.top/stellaai/user-agreement.html`（中文）
-  - 星恋AI 隐私政策：`https://hujiaofenwritingcat.top/stellaai/privacy-policy.html`（中文）
-  - 星恋AI 自动续费：`https://hujiaofenwritingcat.top/stellaai/auto-renew-agreement.html`（中文）
-  - 英文法务：`https://hujiaofenwritingcat.top/stellaai/en/privacy-policy.html` 等（App Store 海外常用）
-  - 其它语言自动续费：`.../stellaai/{es,fr,ja,ko}/auto-renew-agreement.html`
-  - 说明：星恋AI 法务页已提供中文（根目录）及 en/es/fr/ja/ko 译文；App 按当前语言加载对应 HTML。
-  - Stella AI 英文用户协议：`https://hujiaofenwritingcat.top/stellaai/en/user-agreement.html`
-  - Stella AI 英文隐私政策：`https://hujiaofenwritingcat.top/stellaai/en/privacy-policy.html`
-  - Stella AI 英文自动续费：`https://hujiaofenwritingcat.top/stellaai/en/auto-renew-agreement.html`
-  - 西班牙语：`https://hujiaofenwritingcat.top/stellaai/es/privacy-policy.html`（同目录下 user-agreement.html、auto-renew-agreement.html）
-  - 法语：`https://hujiaofenwritingcat.top/stellaai/fr/privacy-policy.html`
-  - 日语：`https://hujiaofenwritingcat.top/stellaai/ja/privacy-policy.html`
-  - 韩语：`https://hujiaofenwritingcat.top/stellaai/ko/privacy-policy.html`
+   - 星恋AI 官网：`https://hujiaofenwritingcat.top/stellaai/`
+   - 星恋AI 各语言法务页：见下方「星恋AI 法务页地址」，逐个打开确认
 3. 确认图片正常显示
 4. 测试移动端访问
+
+## 🌐 星恋AI 营销网站地址
+
+- 营销网址（官网首页）：https://hujiaofenwritingcat.top/stellaai/
+- 对应文件：`stellaai/index.html`，目前仅有中文版
+- App Store Connect 中各语言商品页的「营销网址（Marketing URL）」均填此地址
+
+## 🌐 星恋AI 法务页地址
+
+中文为**中国大陆版**（放在 `stellaai/` 根目录）；其它语言为**国际版**（放在 `stellaai/{语言代码}/`），以英文版为准，其它语言译本仅供参考。App 内按当前界面语言加载对应版本（本地 `assets/legal/`，内容与这里保持一致）。
+
+| 语言 | 用户协议 | 隐私政策 | 自动续费服务协议 |
+|------|----------|----------|------------------|
+| 简体中文（中国大陆版） | https://hujiaofenwritingcat.top/stellaai/user-agreement.html | https://hujiaofenwritingcat.top/stellaai/privacy-policy.html | https://hujiaofenwritingcat.top/stellaai/auto-renew-agreement.html |
+| English（国际版，以此为准） | https://hujiaofenwritingcat.top/stellaai/en/user-agreement.html | https://hujiaofenwritingcat.top/stellaai/en/privacy-policy.html | https://hujiaofenwritingcat.top/stellaai/en/auto-renew-agreement.html |
+| Español | https://hujiaofenwritingcat.top/stellaai/es/user-agreement.html | https://hujiaofenwritingcat.top/stellaai/es/privacy-policy.html | https://hujiaofenwritingcat.top/stellaai/es/auto-renew-agreement.html |
+| Français | https://hujiaofenwritingcat.top/stellaai/fr/user-agreement.html | https://hujiaofenwritingcat.top/stellaai/fr/privacy-policy.html | https://hujiaofenwritingcat.top/stellaai/fr/auto-renew-agreement.html |
+| 日本語 | https://hujiaofenwritingcat.top/stellaai/ja/user-agreement.html | https://hujiaofenwritingcat.top/stellaai/ja/privacy-policy.html | https://hujiaofenwritingcat.top/stellaai/ja/auto-renew-agreement.html |
+| 한국어 | https://hujiaofenwritingcat.top/stellaai/ko/user-agreement.html | https://hujiaofenwritingcat.top/stellaai/ko/privacy-policy.html | https://hujiaofenwritingcat.top/stellaai/ko/auto-renew-agreement.html |
+
+App Store Connect 中各语言商品页的「隐私政策网址」填对应语言的隐私政策地址；没有单独译本的语言填英文版。
+
+修改法务页时，`website-deploy/stellaai/` 与 App 仓库 `stella_ai/assets/legal/` 两处需同步更新。
 
 ## 📝 注意事项
 
