@@ -63,9 +63,13 @@ rsync -avz website-deploy/ user@your-server:/path/to/website/
 
 ## 🌐 星恋AI 营销网站地址
 
-- 营销网址（官网首页）：https://hujiaofenwritingcat.top/stellaai/
-- 对应文件：`stellaai/index.html`，目前仅有中文版
-- App Store Connect 中各语言商品页的「营销网址（Marketing URL）」均填此地址
+| 语言 | 网址 | 对应文件 |
+|------|------|----------|
+| 中文 | https://hujiaofenwritingcat.top/stellaai/ | `stellaai/index.html` |
+| English | https://hujiaofenwritingcat.top/stellaai/en/ | `stellaai/en/index.html` |
+
+- 两个首页右上角均有「中文 / English」切换
+- App Store Connect 中「营销网址（Marketing URL）」与「技术支持网址（Support URL）」：简体中文商品页填中文首页，其它语言商品页填英文首页（首页已含产品简介、下载链接、支持邮箱与协议链接）
 
 ## 🌐 星恋AI 法务页地址
 
