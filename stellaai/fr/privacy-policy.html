@@ -119,11 +119,11 @@
 <body>
     <div class="container">
         <h1>Stella AI · Politique de confidentialité</h1>
-        <p class="meta">Mise à jour : 15 septembre 2026 | Entrée en vigueur : 15 septembre 2026</p>
-        <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">Cette traduction est fournie à titre de commodité. En cas de conflit, la version chinoise simplifiée prévaut pour les utilisateurs en Chine continentale ; la version anglaise prévaut pour les autres utilisateurs.</p>
+        <p class="meta">Mise à jour : 27 septembre 2026 | Entrée en vigueur : 27 septembre 2026</p>
+        <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">Version internationale : s’applique aux utilisateurs situés hors de Chine continentale. La version anglaise prévaut ; les autres versions linguistiques sont fournies à titre indicatif. Pour les utilisateurs en Chine continentale, la version en chinois simplifié s’applique.</p>
 
         <div class="intro">
-            <p>Stella AI (« App » ou « nous ») est une application d’accompagnement émotionnel et de discussion avec des personnages virtuels IA. Nous élaborons la présente politique conformément aux lois applicables, notamment la loi chinoise sur la cybersécurité, la protection des informations personnelles et la sécurité des données.</p>
+            <p>Stella AI (« App » ou « nous ») est une application d’accompagnement émotionnel et de discussion avec des personnages virtuels IA. Nous traitons les données personnelles conformément aux lois applicables en matière de protection des données, notamment, le cas échéant, le Règlement général sur la protection des données de l’UE et le RGPD britannique (« RGPD »), le California Consumer Privacy Act (« CCPA »), la loi japonaise sur la protection des informations personnelles, la loi coréenne sur la protection des informations personnelles et la loi de la République populaire de Chine sur la protection des informations personnelles.</p>
             <p>Lisez cette politique avant utilisation, <span class="highlight">surtout l’envoi des discussions à des modèles IA tiers, la localisation pour la météo, caméra/photos, suppression de compte et réinitialisation du mot de passe</span>. En cas de désaccord, cessez d’utiliser l’App.</p>
         </div>
         <div class="section">
@@ -205,7 +205,7 @@
             <ul>
                 <li><strong>Sur l’appareil :</strong> historique de chat, personnages, humeur, souvenirs, progression, préférences, cache météo/droits</li>
                 <li><strong>Cloud :</strong> uniquement compte (e-mail, mot de passe haché, ID), avatar, enregistrements d’abonnement</li>
-                <li>Serveurs en Chine continentale ; tout transfert transfrontalier ferait l’objet d’une information et d’un consentement séparés</li>
+                <li><strong>Localisation des serveurs :</strong> les données cloud (compte, avatar, abonnements) sont hébergées par Supabase sur des serveurs Amazon Web Services en Inde (région de Mumbai) ; les requêtes IA transitent par notre serveur relais hébergé sur Alibaba Cloud et sont traitées par DeepSeek en Chine continentale (voir section 11)</li>
             </ul>
             <h3>3.2 Stockage du chat (important)</h3>
             <p><span class="highlight">Les chats sont stockés localement par défaut ; nos serveurs ne conservent pas le corps des messages.</span> Pour générer des réponses, messages, contexte et réglages sont envoyés en temps réel à l’IA tierce (section 4). Désinstaller, effacer les données ou changer d’appareil peut rendre le chat local irrécupérable.</p>
@@ -242,11 +242,13 @@
             <ul>
                 <li><strong>Partagé :</strong> e-mail, mot de passe haché, ID, avatar, abonnements</li>
                 <li><strong>Finalité :</strong> authentification, fichiers, sync d’abonnement</li>
+                <li><strong>Localisation :</strong> Amazon Web Services, Inde (région de Mumbai)</li>
             </ul>
             <h4>• Apple</h4>
             <ul>
                 <li><strong>Partagé :</strong> requêtes IAP/abonnement, reçus, restauration</li>
                 <li><strong>Finalité :</strong> paiement et gestion d’abonnement ; politique Apple applicable</li>
+                <li><strong>Vérification des abonnements :</strong> notre backend Supabase transmet l’identifiant de transaction et les notifications d’abonnement signées par Apple à notre serveur de vérification hébergé sur Alibaba Cloud, qui interroge Apple et renvoie le statut ; ce serveur ne conserve pas ces données, et la liaison abonnement–compte est stockée dans Supabase</li>
             </ul>
             <h4>• Météo et géoloc (Open-Meteo, BigDataCloud)</h4>
             <ul>
@@ -314,11 +316,35 @@
                 <li><strong>E-mail support :</strong> 869922457@qq.com</li>
                 <li><strong>Dans l’App :</strong> Moi → À propos</li>
             </ul>
-            <p>Vous pouvez aussi saisir les autorités compétentes si vos droits sont atteints.</p>
+            <p>Vous pouvez également introduire une réclamation auprès de l’autorité de protection des données de votre pays ou région de résidence (voir section 12).</p>
         </div>
         <div class="section">
-            <h2>11. Droit applicable</h2>
-            <p>Droit de la Chine continentale (RPC).</p>
+            <h2>11. Transferts internationaux de données</h2>
+            <p>Nous et nos prestataires opérons dans différents pays. Selon la fonction utilisée, vos données personnelles peuvent être transférées et traitées hors de votre pays, notamment :</p>
+            <ul>
+                <li><strong>Inde :</strong> compte, avatar et abonnements (Supabase, hébergé sur Amazon Web Services, région de Mumbai)</li>
+                <li><strong>Chine continentale :</strong> texte de chat et contexte envoyés pour la génération IA (notre serveur relais sur Alibaba Cloud, et DeepSeek) ; nous ne conservons pas le corps des messages sur notre serveur</li>
+                <li><strong>Autres pays :</strong> Apple (paiements et abonnements) et les services météo/géocodage (Open-Meteo, BigDataCloud), selon leurs propres politiques</li>
+            </ul>
+            <p>Ces pays peuvent ne pas offrir un niveau de protection équivalent à celui de votre pays. Lorsque la loi l’exige, nous appliquons des garanties telles que des conditions contractuelles de traitement avec nos prestataires, le chiffrement en transit et la minimisation des données, et nous nous appuyons le cas échéant sur votre consentement. Veuillez noter que lorsque vous utilisez le chat IA, vos messages sont envoyés en Chine continentale pour y être traités. Contactez-nous pour plus d’informations sur ces garanties.</p>
+        </div>
+
+        <div class="section">
+            <h2>12. Informations complémentaires pour certaines régions</h2>
+            <h3>12.1 Espace économique européen, Royaume-Uni et Suisse</h3>
+            <p><strong>Bases légales :</strong> exécution du contrat (compte, chat IA, abonnements) ; votre consentement (localisation pour la météo, caméra/photos, notifications, retirable à tout moment) ; nos intérêts légitimes (sécurité, prévention de la fraude et des abus, stabilité du service) ; respect d’obligations légales.</p>
+            <p><strong>Vos droits :</strong> accès, rectification, effacement, limitation, portabilité, opposition aux traitements fondés sur l’intérêt légitime et retrait du consentement. Vous pouvez introduire une réclamation auprès de l’autorité de contrôle de votre pays (en France : la CNIL). Nous répondons sous un mois, prolongeable dans les cas prévus par la loi.</p>
+            <h3>12.2 Californie (États-Unis)</h3>
+            <p>Nous ne vendons pas vos données personnelles et ne les partageons pas à des fins de publicité comportementale inter-contextes. Nous n’utilisons pas les données sensibles à d’autres fins que la fourniture du service. Vous avez le droit de savoir, d’accéder, de corriger et de supprimer vos données, sans discrimination pour l’exercice de ces droits.</p>
+            <h3>12.3 Japon</h3>
+            <p>Vous pouvez demander la communication, la correction, la suspension d’utilisation ou la suppression de vos données conservées, ainsi que la communication des registres de transmission à des tiers. Pour les transmissions à des tiers à l’étranger (Inde, Chine continentale, etc.), vous pouvez demander des informations sur le régime de protection du pays concerné et les mesures prises par le destinataire.</p>
+            <h3>12.4 République de Corée</h3>
+            <p>Vous pouvez demander l’accès, la correction, la suppression ou la suspension du traitement de vos données, et déposer une plainte auprès de la Personal Information Protection Commission ou du centre de signalement des atteintes aux données personnelles (118). Les données sont transférées à l’étranger comme décrit à la section 11 (pays destinataires, éléments, finalités et durées de conservation selon les sections 3, 4 et 11). Vous pouvez refuser ce transfert, mais les fonctions essentielles (compte, chat IA) ne seront alors pas disponibles. Contact confidentialité : 869922457@qq.com.</p>
+        </div>
+
+        <div class="section">
+            <h2>13. Droit applicable</h2>
+            <p>La présente politique est régie par le droit de la République populaire de Chine (Chine continentale), sans préjudice des lois impératives de protection des données ou des consommateurs de votre pays ou région de résidence, qui continuent de s’appliquer.</p>
         </div>
 
         <div class="footer">

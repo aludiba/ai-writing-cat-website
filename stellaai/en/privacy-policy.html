@@ -120,11 +120,11 @@
 
     <div class="container">
         <h1>Stella AI · Privacy Policy</h1>
-        <p class="meta">Updated: September 15, 2026 | Effective: September 15, 2026</p>
-        <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">Translation provided for convenience only. If there is any conflict, the Simplified Chinese version prevails for users in mainland China; the English version prevails for users elsewhere.</p>
+        <p class="meta">Updated: September 27, 2026 | Effective: September 27, 2026</p>
+        <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">International Version: applies to users outside mainland China. The English version prevails; other language versions are for reference only. For users in mainland China, the Simplified Chinese version applies.</p>
 
         <div class="intro">
-            <p>Stella AI (“App” or “we”) is an AI virtual-character emotional companionship and chat application. We follow applicable laws including the Cybersecurity Law, Personal Information Protection Law, and Data Security Law of the People’s Republic of China in preparing this Privacy Policy.</p>
+            <p>Stella AI (“App” or “we”) is an AI virtual-character emotional companionship and chat application. We process personal information in accordance with applicable data protection laws, including, where applicable, the EU General Data Protection Regulation and UK GDPR (“GDPR”), the California Consumer Privacy Act as amended (“CCPA”), Japan’s Act on the Protection of Personal Information, Korea’s Personal Information Protection Act, and the Personal Information Protection Law of the People’s Republic of China.</p>
             <p>Please read this Policy before use, <span class="highlight">especially how chat is sent to third-party AI models, location for weather, camera/photo permissions, account deletion, and password reset</span>. If you disagree, stop using the App.</p>
         </div>
 
@@ -209,7 +209,7 @@
             <ul>
                 <li><strong>On device:</strong> chat history, character settings, mood, memories, relationship/chapter progress, preferences, weather cache, entitlement cache—in local DB and preferences</li>
                 <li><strong>Cloud:</strong> account (email, hashed password, user ID), avatar files, subscription records only</li>
-                <li>Servers and storage are in mainland China; cross-border transfer would follow separate legal notice and consent</li>
+                <li><strong>Server locations:</strong> cloud data (account, avatar, subscription records) is hosted by Supabase on Amazon Web Services servers in India (Mumbai region); AI requests pass through our API relay server hosted on Alibaba Cloud and are processed by DeepSeek in mainland China (see Section 11)</li>
             </ul>
             <h3>3.2 Chat storage (important)</h3>
             <p><span class="highlight">Chat with AI characters is stored locally on your device by default; our servers do not store chat body text.</span> To generate replies, your messages, needed context, and character settings are sent in real time to third-party AI (see Section 4). Uninstalling, clearing data, or changing devices may make local chat unrecoverable.</p>
@@ -248,11 +248,13 @@
             <ul>
                 <li><strong>Shared:</strong> email, hashed password, user ID, avatar, subscription records</li>
                 <li><strong>Purpose:</strong> authentication, file storage, subscription sync</li>
+                <li><strong>Location:</strong> Amazon Web Services, India (Mumbai region)</li>
             </ul>
             <h4>• Apple</h4>
             <ul>
                 <li><strong>Shared:</strong> IAP/subscription requests, receipts, restore requests</li>
                 <li><strong>Purpose:</strong> payment, subscription management, entitlement verification; Apple’s privacy policy applies</li>
+                <li><strong>Subscription verification:</strong> our Supabase backend sends the transaction ID and Apple-signed subscription notifications to our verification server hosted on Alibaba Cloud, which queries Apple for the subscription status and returns it; the verification server does not store this data, and the subscription-to-account binding is stored in Supabase</li>
             </ul>
             <h4>• Weather and geolocation (Open-Meteo, BigDataCloud)</h4>
             <ul>
@@ -328,12 +330,36 @@
                 <li><strong>Support email:</strong> 869922457@qq.com</li>
                 <li><strong>In the App:</strong> Me → About</li>
             </ul>
-            <p>We will reply as soon as practicable. You may also complain to competent authorities (cyberspace, telecom, public security, etc.) if you believe your rights were harmed.</p>
+            <p>We will reply as soon as practicable. You may also lodge a complaint with the data protection authority in your country or region of residence (see Section 12).</p>
         </div>
 
         <div class="section">
-            <h2>11. Governing law</h2>
-            <p>This Policy is governed by the laws of mainland China (People’s Republic of China).</p>
+            <h2>11. International Data Transfers</h2>
+            <p>We and our service providers operate in different countries. Depending on the feature, your personal information may be transferred to and processed in countries other than your own, including:</p>
+            <ul>
+                <li><strong>India:</strong> account, avatar and subscription records (Supabase, hosted on Amazon Web Services, Mumbai region)</li>
+                <li><strong>Mainland China:</strong> chat text and context sent for AI generation (our API relay server on Alibaba Cloud, and DeepSeek); we do not persist chat body text on our server</li>
+                <li><strong>Other countries:</strong> Apple (payments and subscriptions) and weather/geocoding providers (Open-Meteo, BigDataCloud), under their own policies</li>
+            </ul>
+            <p>These countries may not provide the same level of data protection as your country. Where required by law, we apply safeguards such as data processing terms with our providers, encryption in transit, and data minimization, and where applicable we rely on your consent. Please note that when you use AI chat, your messages are sent to mainland China for processing. Contact us for more information about these safeguards.</p>
+        </div>
+
+        <div class="section">
+            <h2>12. Additional Information for Users in Specific Regions</h2>
+            <h3>12.1 European Economic Area, United Kingdom and Switzerland</h3>
+            <p><strong>Legal bases:</strong> performance of our contract with you (account, AI chat, subscriptions); your consent (location for weather, camera/photos, notifications, which you may withdraw at any time); our legitimate interests (security, fraud and abuse prevention, service stability); and compliance with legal obligations.</p>
+            <p><strong>Your rights:</strong> access, rectification, erasure, restriction of processing, data portability, objection to processing based on legitimate interests, and withdrawal of consent. You may lodge a complaint with your local data protection supervisory authority. We respond within one month, extendable where permitted by law.</p>
+            <h3>12.2 California (United States)</h3>
+            <p>We do not sell your personal information and do not share it for cross-context behavioral advertising. We do not use sensitive personal information for purposes other than providing the service. You have the right to know, access, correct, and delete your personal information, and we will not discriminate against you for exercising these rights.</p>
+            <h3>12.3 Japan</h3>
+            <p>You may request disclosure, correction, suspension of use, or deletion of your retained personal data, and disclosure of records of provision to third parties. For provision to third parties in foreign countries (such as India and mainland China), you may request information about the data protection system of the relevant country and the measures taken by the recipient.</p>
+            <h3>12.4 Republic of Korea</h3>
+            <p>You may request access, correction, deletion, or suspension of processing of your personal information, and you may file a complaint with the Personal Information Protection Commission or the Personal Information Infringement Report Center (dial 118). Personal information is transferred overseas as described in Section 11 (recipient countries, items, purposes and retention periods are as stated in Sections 3, 4 and 11). You may refuse the transfer, but core features such as your account and AI chat will then be unavailable. Privacy contact: 869922457@qq.com.</p>
+        </div>
+
+        <div class="section">
+            <h2>13. Governing Law</h2>
+            <p>This Policy is governed by the laws of the People’s Republic of China (mainland China), without prejudice to any mandatory data protection or consumer protection laws of your country or region of residence, which continue to apply.</p>
         </div>
 
         <div class="footer">
