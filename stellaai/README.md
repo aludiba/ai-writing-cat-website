@@ -14,8 +14,10 @@ stellaai/
 │   ├── app-icon.png
 │   ├── apple-touch-icon.png
 │   └── favicon.png
-└── stellaai_show/             # App Store 展示截图
-    ├── 1.jpg … 6.jpg
+└── stellaai_show/             # 各语言展示截图
+    ├── zh/                    # 中文：1.png … 6.png（App Store 6.5" 1284×2778）+ 1.jpg … 6.jpg（官网用）
+    ├── en/                    # 英文：1.png … 6.png（App Store 6.9" 1320×2868）+ 1.jpg … 6.jpg（官网用）
+    └── es/ fr/ ja/ ko/        # 其它语言：1.png … 6.png（App Store 6.9" 1320×2868）
 ```
 
 ## 访问地址
@@ -30,7 +32,7 @@ stellaai/
 
 - 结构参考根目录「喵墨」官网（导航 / Hero / 截图 / 好评 / 功能 / 关于 / 支持 / 页脚）
 - 视觉对齐 App：深底 `#131415`、品牌金 `#FCD77C`、冷雾白标题、Sora + Noto Sans SC
-- 截图素材来自 `stellaai_show/`
+- 截图素材来自 `stellaai_show/<语言>/`，官网引用其中的 jpg
 
 ## 部署注意
 
