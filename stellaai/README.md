@@ -15,7 +15,7 @@ stellaai/
 │   ├── apple-touch-icon.png
 │   └── favicon.png
 └── stellaai_show/             # 各语言展示截图
-    ├── zh/                    # 中文：1.png … 6.png（App Store 6.5" 1284×2778）+ 1.jpg … 6.jpg（官网用）
+    ├── zh/                    # 中文：1.png … 6.png（App Store 6.9" 1320×2868）+ 1.jpg … 6.jpg（官网用）
     ├── en/                    # 英文：1.png … 6.png（App Store 6.9" 1320×2868）+ 1.jpg … 6.jpg（官网用）
     └── es/ fr/ ja/ ko/        # 其它语言：1.png … 6.png（App Store 6.9" 1320×2868）
 ```
