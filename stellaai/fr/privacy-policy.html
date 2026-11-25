@@ -114,12 +114,29 @@
             h2 { font-size: 17px; }
         }
 
+
+        /* Default: Apple only. Android App/UA injects platform-android to show Google. */
+        .store-google { display: none !important; }
+        html.platform-android .store-google { display: revert !important; }
+        html.platform-android .store-apple { display: none !important; }
+
     </style>
+
+
+<script>
+(function () {
+  var html = document.documentElement;
+  if (html.classList.contains('platform-ios') || html.classList.contains('platform-android')) return;
+  var ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) html.classList.add('platform-android');
+  else html.classList.add('platform-ios');
+})();
+</script>
 </head>
 <body>
     <div class="container">
         <h1>Stella AI · Politique de confidentialité</h1>
-        <p class="meta">Mise à jour : 5 novembre 2026 | Entrée en vigueur : 5 novembre 2026</p>
+        <p class="meta">Mise à jour : 25 novembre 2026 | Entrée en vigueur : 25 novembre 2026</p>
         <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">Version internationale : s’applique aux utilisateurs situés hors de Chine continentale. La version anglaise prévaut ; les autres versions linguistiques sont fournies à titre indicatif. Pour les utilisateurs en Chine continentale, la version en chinois simplifié s’applique.</p>
 
         <div class="intro">
@@ -163,13 +180,15 @@
                 <li>Identifiant produit, statut, expiration, renouvellement automatique</li>
                 <li>Nous ne collectons <strong>pas</strong> le mot de passe Apple ID, numéros de carte ou mots de passe de paiement ; Apple gère le paiement</li>
             </ul>
-            <h3>1.6 Appareil et journaux</h3>
+            <h3>1.6 Signalements de contenu</h3>
+            <p>Lorsque vous signalez un message IA, nous collectons le texte signalé, le motif, l’horodatage, le type de personnage, la version de l’app et la plateforme, pour examen et sécurité.</p>
+            <h3>1.7 Appareil et journaux</h3>
             <ul>
                 <li>Modèle, OS, version d’app, langue et fuseau (UI et notifications locales)</li>
                 <li>État réseau et adresse IP (lors du traitement des requêtes)</li>
                 <li>Journaux de crash/erreur pour la stabilité</li>
             </ul>
-            <h3>1.7 Ce que nous ne collectons pas</h3>
+            <h3>1.8 Ce que nous ne collectons pas</h3>
             <ul>
                 <li>Contacts, SMS, journaux d’appels</li>
                 <li>Micro/audio (pas de fonction vocale actuellement)</li>
@@ -204,8 +223,8 @@
             <h3>3.1 Où sont les données</h3>
             <ul>
                 <li><strong>Sur l’appareil :</strong> historique de chat, personnages, humeur, souvenirs, progression, préférences, cache météo/droits</li>
-                <li><strong>Cloud :</strong> uniquement compte (e-mail, mot de passe haché, ID), avatar, enregistrements d’abonnement</li>
-                <li><strong>Localisation des serveurs :</strong> les données cloud (compte, avatar, abonnements) sont hébergées par Supabase sur des serveurs Amazon Web Services en Inde (région de Mumbai) ; les requêtes IA transitent par notre serveur relais hébergé sur Alibaba Cloud et sont traitées par DeepSeek en Chine continentale (voir section 11)</li>
+                <li><strong>Cloud :</strong> uniquement compte (e-mail, mot de passe haché, ID), avatar, enregistrements d’abonnement et signalements de contenu</li>
+                <li><strong>Localisation des serveurs :</strong> les données cloud (compte, avatar, abonnements, signalements) sont hébergées par Supabase sur des serveurs Amazon Web Services en Inde (région de Mumbai) ; les requêtes IA transitent par notre serveur relais hébergé sur Alibaba Cloud et sont traitées par DeepSeek en Chine continentale (voir section 11)</li>
             </ul>
             <h3>3.2 Stockage du chat (important)</h3>
             <p><span class="highlight">Les chats sont stockés localement par défaut ; nos serveurs ne conservent pas le corps des messages.</span> Pour générer des réponses, et seulement après votre accord dans l’App, messages, contexte et réglages sont envoyés en temps réel à l’IA tierce (section 4). Désinstaller, effacer les données ou changer d’appareil peut rendre le chat local irrécupérable.</p>
@@ -243,16 +262,23 @@
             </ul>
             <h4>• Cloud (Supabase)</h4>
             <ul>
-                <li><strong>Partagé :</strong> e-mail, mot de passe haché, ID, avatar, abonnements</li>
-                <li><strong>Finalité :</strong> authentification, fichiers, sync d’abonnement</li>
+                <li><strong>Partagé :</strong> e-mail, mot de passe haché, ID, avatar, abonnements, signalements</li>
+                <li><strong>Finalité :</strong> authentification, fichiers, sync d’abonnement, traitement des signalements</li>
                 <li><strong>Localisation :</strong> Amazon Web Services, Inde (région de Mumbai)</li>
             </ul>
-            <h4>• Apple</h4>
+            <div class="store-apple"><h4>• Apple</h4>
             <ul>
                 <li><strong>Partagé :</strong> requêtes IAP/abonnement, reçus, restauration</li>
                 <li><strong>Finalité :</strong> paiement et gestion d’abonnement ; politique Apple applicable</li>
                 <li><strong>Vérification des abonnements :</strong> notre backend Supabase transmet l’identifiant de transaction et les notifications d’abonnement signées par Apple à notre serveur de vérification hébergé sur Alibaba Cloud, qui interroge Apple et renvoie le statut ; ce serveur ne conserve pas ces données, et la liaison abonnement–compte est stockée dans Supabase</li>
             </ul>
+            </div>
+            <div class="store-google"><h4>• Google</h4>
+            <ul>
+                <li><strong>Partagé :</strong> requêtes Google Play Billing, jetons d’achat, informations de restauration</li>
+                <li><strong>Finalité :</strong> paiement, gestion d’abonnement, vérification des droits ; la politique de confidentialité de Google s’applique</li>
+            </ul>
+            </div>
             <h4>• Météo et géoloc (Open-Meteo, BigDataCloud)</h4>
             <ul>
                 <li><strong>Partagé :</strong> lat/long si autorisé</li>
@@ -281,7 +307,8 @@
             <h3>5.4 Retrait du consentement</h3>
             <ul>
                 <li><strong>Partage de données avec l’IA :</strong> Réglages → Confidentialité → Autoriser le partage de données avec l’IA ; après retrait, aucune donnée n’est envoyée à l’IA tierce</li>
-                <li><strong>Localisation :</strong> Réglages iPhone → Confidentialité et sécurité → Service de localisation → Stella AI</li>
+                <li class="store-apple"><strong>Localisation :</strong> désactivez la localisation pour l’app dans les réglages système (Confidentialité et sécurité → Service de localisation)</li>
+                <li class="store-google"><strong>Localisation :</strong> désactivez la localisation pour l’app dans les réglages système (Applications → Stella AI → Autorisations)</li>
                 <li><strong>Caméra/Photos :</strong> révoquer dans les réglages système</li>
                 <li><strong>Notifications :</strong> désactiver dans l’App ou le système</li>
             </ul>
@@ -308,7 +335,8 @@
         </div>
         <div class="section">
             <h2>8. Liens tiers</h2>
-            <p>L’App peut renvoyer vers des tiers (App Store, gestion d’abonnements Apple). Leur politique de confidentialité s’applique.</p>
+            <p class="store-apple">L’App peut renvoyer vers des tiers (App Store, pages de gestion d’abonnement). Leur politique de confidentialité s’applique.</p>
+            <p class="store-google">L’App peut renvoyer vers des tiers (Google Play, pages de gestion d’abonnement). Leur politique de confidentialité s’applique.</p>
         </div>
         <div class="section">
             <h2>9. Modifications</h2>
@@ -326,9 +354,10 @@
             <h2>11. Transferts internationaux de données</h2>
             <p>Nous et nos prestataires opérons dans différents pays. Selon la fonction utilisée, vos données personnelles peuvent être transférées et traitées hors de votre pays, notamment :</p>
             <ul>
-                <li><strong>Inde :</strong> compte, avatar et abonnements (Supabase, hébergé sur Amazon Web Services, région de Mumbai)</li>
+                <li><strong>Inde :</strong> compte, avatar, abonnements et signalements (Supabase, hébergé sur Amazon Web Services, région de Mumbai)</li>
                 <li><strong>Chine continentale :</strong> texte de chat et contexte envoyés pour la génération IA (notre serveur relais sur Alibaba Cloud, et DeepSeek) ; nous ne conservons pas le corps des messages sur notre serveur</li>
-                <li><strong>Autres pays :</strong> Apple (paiements et abonnements) et les services météo/géocodage (Open-Meteo, BigDataCloud), selon leurs propres politiques</li>
+                <li class="store-apple"><strong>Autres pays :</strong> Apple (paiements et abonnements) et les services météo/géocodage (Open-Meteo, BigDataCloud), selon leurs propres politiques</li>
+                <li class="store-google"><strong>Autres pays :</strong> Google (paiements et abonnements) et les services météo/géocodage (Open-Meteo, BigDataCloud), selon leurs propres politiques</li>
             </ul>
             <p>Bien que les lois diffèrent selon les pays, nous exigeons de tout sous-traitant recevant des données personnelles une protection identique ou équivalente à celle prévue par la présente Politique. Nous appliquons des garanties telles que des conditions contractuelles de traitement avec nos prestataires, le chiffrement en transit et la minimisation des données, et nous nous appuyons le cas échéant sur votre consentement. Veuillez noter que lorsque vous utilisez le chat IA, vos messages sont envoyés en Chine continentale pour y être traités. Contactez-nous pour plus d’informations sur ces garanties.</p>
         </div>

@@ -114,12 +114,29 @@
             h2 { font-size: 17px; }
         }
 
+
+        /* Default: Apple only. Android App/UA injects platform-android to show Google. */
+        .store-google { display: none !important; }
+        html.platform-android .store-google { display: revert !important; }
+        html.platform-android .store-apple { display: none !important; }
+
     </style>
+
+
+<script>
+(function () {
+  var html = document.documentElement;
+  if (html.classList.contains('platform-ios') || html.classList.contains('platform-android')) return;
+  var ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) html.classList.add('platform-android');
+  else html.classList.add('platform-ios');
+})();
+</script>
 </head>
 <body>
     <div class="container">
         <h1>Stella AI · Política de privacidad</h1>
-        <p class="meta">Actualizado: 5 de noviembre de 2026 | Vigente: 5 de noviembre de 2026</p>
+        <p class="meta">Actualizado: 25 de noviembre de 2026 | Vigente: 25 de noviembre de 2026</p>
         <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">Versión internacional: se aplica a usuarios fuera de China continental. Prevalece la versión en inglés; las demás versiones lingüísticas son solo de referencia. Para usuarios en China continental se aplica la versión en chino simplificado.</p>
 
         <div class="intro">
@@ -150,8 +167,10 @@
             <h3>1.4 Cámara y fotos (opcional)</h3>
             <p>Solo al subir avatar; solo la imagen elegida.</p>
             <h3>1.5 Suscripciones</h3>
-            <p>Recibos IAP, ID de transacción, estado y renovación. <strong>No</strong> recopilamos contraseñas de Apple ID ni datos de tarjetas.</p>
-            <h3>1.6 Dispositivo y registros</h3>
+            <p>Recibos IAP, ID de transacción, estado y renovación. <strong>No</strong> recopilamos contraseñas de la cuenta de la tienda ni datos de tarjetas.</p>
+            <h3>1.6 Informes de contenido</h3>
+            <p>Al denunciar un mensaje de IA, recopilamos el texto denunciado, el motivo, la hora, el tipo de personaje, la versión de la app y la plataforma, para revisión y seguridad.</p>
+            <h3>1.7 Dispositivo y registros</h3>
             <p>Modelo, SO, versión, idioma/zona horaria, red/IP, registros de errores.</p>
             <h3>1.7 No recopilamos</h3>
             <p>Contactos, SMS, llamadas, micrófono, biometría, SDK publicitarios ni analítica de perfilado publicitario.</p>
@@ -170,7 +189,7 @@
             <ul>
                 <li><strong>En el dispositivo:</strong> chat, personajes, ánimo, recuerdos, preferencias</li>
                 <li><strong>Nube:</strong> solo cuenta, avatar y registros de suscripción</li>
-                <li><strong>Ubicación de los servidores:</strong> los datos en la nube (cuenta, avatar, suscripciones) se alojan en Supabase sobre servidores de Amazon Web Services en India (región de Bombay); las solicitudes de IA pasan por nuestro servidor intermediario en Alibaba Cloud y las procesa DeepSeek en China continental (véase la sección 11)</li>
+                <li><strong>Ubicación de los servidores:</strong> los datos en la nube (cuenta, avatar, suscripciones, informes) se alojan en Supabase sobre servidores de Amazon Web Services en India (región de Bombay); las solicitudes de IA pasan por nuestro servidor intermediario en Alibaba Cloud y las procesa DeepSeek en China continental (véase la sección 11)</li>
             </ul>
             <p><span class="highlight">El chat se guarda localmente por defecto; no almacenamos el cuerpo del chat en nuestros servidores.</span> Para generar respuestas, y solo después de que lo aceptes en la App, se envía en tiempo real a IA de terceros (sección 4). Desinstalar puede hacer irrecuperable el chat local.</p>
             <p>«Olvidé la contraseña» permite nueva contraseña con el correo; <span class="highlight">sin contraseña anterior ni código de correo</span> en la versión actual. Proteja su correo.</p>
@@ -181,7 +200,8 @@
             <ul>
                 <li><strong>DeepSeek (Hangzhou DeepSeek Artificial Intelligence Co., Ltd., China continental):</strong> los mensajes que envías a los personajes y el contexto reciente necesario para generar respuestas; la configuración del personaje (nombre, cómo te llama, rasgos); tu puntuación y nota de ánimo cuando registras tu estado de ánimo; la franja horaria y un resumen general del tiempo para los saludos (sin ciudad ni coordenadas). Se envían vía api.hujiaofenwritingcat.top solo para generar respuestas. <span class="highlight">Antes de cualquier envío, la App muestra un aviso independiente que explica qué datos se envían y a quién, y pide tu permiso; no se envía nada a DeepSeek hasta que aceptes.</span> Puedes retirarlo en Ajustes → Privacidad → Permitir compartir datos con la IA. Exigimos a DeepSeek, mediante las condiciones contractuales y de servicio aplicables, el mismo nivel de protección o uno equivalente al de esta Política, incluida la limitación de finalidad, la confidencialidad, las medidas de seguridad y la eliminación o devolución cuando el tratamiento deje de ser necesario. Nunca se envían tu correo, avatar, ciudad o ubicación precisa, contactos ni datos de pago</li>
                 <li><strong>Supabase:</strong> correo, hash de contraseña, ID, avatar, suscripción (Amazon Web Services, India – región de Bombay)</li>
-                <li><strong>Apple:</strong> IAP/recibos/restauración. Para verificar suscripciones, nuestro backend en Supabase envía el ID de transacción y las notificaciones firmadas por Apple a nuestro servidor de verificación en Alibaba Cloud, que consulta a Apple y devuelve el estado sin conservar los datos; el vínculo suscripción–cuenta se guarda en Supabase</li>
+                <li class="store-apple"><strong>Apple:</strong> IAP/recibos/restauración. Para verificar suscripciones, nuestro backend en Supabase envía el ID de transacción y las notificaciones firmadas por Apple a nuestro servidor de verificación en Alibaba Cloud, que consulta a Apple y devuelve el estado sin conservar los datos; el vínculo suscripción–cuenta se guarda en Supabase</li>
+                <li class="store-google"><strong>Google:</strong> Google Play Billing/purchaseToken/restauración. Podemos consultar la Google Play Developer API con el purchaseToken; el vínculo suscripción–cuenta se guarda en Supabase</li>
                 <li><strong>Open-Meteo / BigDataCloud:</strong> lat/long si autoriza clima</li>
             </ul>
         </div>
@@ -199,7 +219,8 @@
         </div>
         <div class="section">
             <h2>8. Enlaces de terceros</h2>
-            <p>App Store y páginas de Apple tienen sus propias políticas.</p>
+            <p class="store-apple">App Store y las páginas de suscripción de la tienda tienen sus propias políticas.</p>
+            <p class="store-google">Google Play y las páginas de suscripción de la tienda tienen sus propias políticas.</p>
         </div>
         <div class="section">
             <h2>9. Cambios</h2>
@@ -218,7 +239,8 @@
             <ul>
                 <li><strong>India:</strong> cuenta, avatar y suscripciones (Supabase, alojado en Amazon Web Services, región de Bombay)</li>
                 <li><strong>China continental:</strong> texto del chat y contexto enviados para la generación de IA (nuestro servidor intermediario en Alibaba Cloud, y DeepSeek); no conservamos el cuerpo del chat en nuestro servidor</li>
-                <li><strong>Otros países:</strong> Apple (pagos y suscripciones) y proveedores de clima/geocodificación (Open-Meteo, BigDataCloud), según sus propias políticas</li>
+                <li class="store-apple"><strong>Otros países:</strong> Apple (pagos y suscripciones) y proveedores de clima/geocodificación (Open-Meteo, BigDataCloud), según sus propias políticas</li>
+                <li class="store-google"><strong>Otros países:</strong> Google (pagos y suscripciones) y proveedores de clima/geocodificación (Open-Meteo, BigDataCloud), según sus propias políticas</li>
             </ul>
             <p>Aunque las leyes varían entre países, exigimos a todo encargado que reciba datos personales el mismo nivel de protección o uno equivalente al de esta Política. Aplicamos garantías como condiciones contractuales de tratamiento con nuestros proveedores, cifrado en tránsito y minimización de datos, y, en su caso, nos basamos en su consentimiento. Tenga en cuenta que, al usar el chat de IA, sus mensajes se envían a China continental para su tratamiento. Contáctenos para más información sobre estas garantías.</p>
         </div>

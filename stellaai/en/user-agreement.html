@@ -114,13 +114,30 @@
             h2 { font-size: 17px; }
         }
 
+
+        /* Default: Apple only. Android App/UA injects platform-android to show Google. */
+        .store-google { display: none !important; }
+        html.platform-android .store-google { display: revert !important; }
+        html.platform-android .store-apple { display: none !important; }
+
     </style>
+
+
+<script>
+(function () {
+  var html = document.documentElement;
+  if (html.classList.contains('platform-ios') || html.classList.contains('platform-android')) return;
+  var ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) html.classList.add('platform-android');
+  else html.classList.add('platform-ios');
+})();
+</script>
 </head>
 <body>
 
     <div class="container">
         <h1>Stella AI · User Agreement</h1>
-        <p class="meta">Updated: September 27, 2026 | Effective: September 27, 2026</p>
+        <p class="meta">Updated: November 25, 2026 | Effective: November 25, 2026</p>
         <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">International Version: applies to users outside mainland China. The English version prevails; other language versions are for reference only. For users in mainland China, the Simplified Chinese version applies.</p>
 
         <div class="intro">
@@ -134,7 +151,7 @@
             <p>Stella AI is a virtual-character emotional companionship and chat application powered by artificial intelligence. Core features include:</p>
             <ul>
                 <li><strong>AI chat companionship:</strong> Text conversations with virtual AI characters that reply according to their configured personality and tone</li>
-                <li><strong>Character setup:</strong> Choose built-in characters (tsundere “Yu Han”, gentle “Xiao Yu”) and customize name, how they address you, and personality tags</li>
+                <li><strong>Character setup:</strong> Choose among female characters (e.g. Yu Han, Xiao Yu, Xia You) and male characters (e.g. Shen Yan, Wen Yu, Lu Ye), and customize name, how they address you, and personality tags. All built-in characters are adults</li>
                 <li><strong>Affection and relationship:</strong> Affection level (Lv.1–100) and relationship stages (First meeting, Familiar, Ambiguous, Confession, Lovers, Soulmate) based on interaction</li>
                 <li><strong>Chapter stories:</strong> AI-driven story chapters per character, unlocked as affection increases</li>
                 <li><strong>Memory album:</strong> Curated chat highlights and special moments; you may hide or delete entries</li>
@@ -173,29 +190,37 @@
             <h3>3.1 Free allowance</h3>
             <p>Non-subscribers may use a limited number of AI character replies (currently 50 character-generated replies; your own messages are not counted). After the allowance is used, a subscription is required to continue AI chat. Allowance amounts may change by version; in-app display controls.</p>
             <h3>3.2 Plans</h3>
-            <p>On iOS, the App offers auto-renewing subscriptions via Apple App Store In-App Purchase:</p>
+            <p class="store-apple">Subscriptions are offered through the Apple App Store (In-App Purchase).</p>
+            <p class="store-google">Subscriptions are offered through Google Play (Google Play Billing).</p>
+            <p>Current plans (details as shown in the App and the relevant store):</p>
             <ul>
-                <li><strong>Light monthly:</strong> unlimited chat (price as shown in the App and App Store)</li>
-                <li><strong>Deep monthly:</strong> unlimited chat and all characters (price as shown in the App and App Store)</li>
-                <li><strong>Yearly:</strong> all Deep monthly benefits plus faster affection growth (price as shown in the App and App Store)</li>
+                <li><strong>Light monthly:</strong> unlimited chat</li>
+                <li><strong>Deep monthly:</strong> unlimited chat and all characters</li>
+                <li><strong>Yearly:</strong> all Deep monthly benefits plus faster affection growth</li>
             </ul>
-            <p>Actual price, billing period, free-trial eligibility, and benefits are as shown in the App and on the App Store. Eligible plans may include a free trial per Apple rules.</p>
+            <p>Actual price, currency, billing period, free-trial eligibility, and benefits are as shown in the App and on the store at purchase. Eligible plans may include a free trial under the relevant store’s rules.</p>
             <h3>3.3 Auto-renewal</h3>
             <ul>
-                <li>Subscription fees are charged to your Apple ID when you confirm purchase.</li>
+                <li class="store-apple">Subscription fees are charged to your Apple ID when you confirm purchase.</li>
+                <li class="store-google">Subscription fees are charged to your Google account when you confirm purchase.</li>
                 <li>Unless you cancel at least <strong>24 hours before</strong> the end of the current period, the subscription renews automatically for the selected period and you are charged again.</li>
-                <li>Renewal charges occur within 24 hours before the current period ends.</li>
-                <li>Manage or cancel under <strong>iPhone Settings → Apple ID → Subscriptions</strong>. After canceling, benefits continue until the end of the paid period.</li>
+                <li>Renewal charges generally occur within 24 hours before the current period ends; the exact time is set by the store.</li>
+                <li class="store-apple">Manage or cancel anytime via <strong>Settings → Apple ID → Subscriptions</strong>, or App Store account subscription management. After canceling, benefits continue until the end of the paid period.</li>
+                <li class="store-google">Manage or cancel anytime via <strong>Google Play → Payments &amp; subscriptions → Subscriptions</strong>, or tap “Manage subscription” in the App when membership is active. After canceling, benefits continue until the end of the paid period.</li>
                 <li>Canceling during a free trial ends the trial immediately; typically one free trial per user per subscription group.</li>
             </ul>
             <h3>3.4 Subscription and account binding</h3>
-            <p>Purchases via Apple IAP bind on our servers to your <strong>currently signed-in Stella AI account</strong>. <span class="highlight">One Apple subscription can bind to only one Stella AI account</span>. If you sign in with another account and try to restore, you may be told the subscription is bound elsewhere—sign in with the account used at purchase to keep benefits.</p>
+            <p class="store-apple">App Store purchases bind on our servers to your <strong>currently signed-in Stella AI account</strong>. <span class="highlight">One App Store subscription can bind to only one Stella AI account</span>. If you sign in with another account and try to restore, you may be told the subscription is bound elsewhere—sign in with the account used at purchase to keep benefits. Manage and restore under the same Apple ID used for purchase.</p>
+            <p class="store-google">Google Play purchases bind on our servers to your <strong>currently signed-in Stella AI account</strong>. <span class="highlight">One Google Play subscription can bind to only one Stella AI account</span>. If you sign in with another account and try to restore, you may be told the subscription is bound elsewhere—sign in with the account used at purchase to keep benefits. Manage and restore under the same Google account used for purchase.</p>
             <h3>3.5 Restore purchases</h3>
-            <p>On the subscription screen, tap “Restore purchases” to restore valid subscriptions tied to your Apple ID, subject to binding rules above.</p>
+            <p>On the subscription screen, tap “Restore purchases” to restore valid subscriptions tied to the store account on your device, subject to binding rules above.</p>
             <h3>3.6 Refunds</h3>
-            <p>Under Apple policy, App Store subscription charges are generally non-refundable except where law requires otherwise. Request refunds through Apple (<a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>); we cannot process App Store refunds directly.</p>
+            <p>Store subscription charges are generally non-refundable except where law requires otherwise, and are subject to the relevant store’s refund rules. Request refunds through the store you used; we cannot process store refunds directly:</p>
+            <p class="store-apple">App Store refunds: <a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a> (reviewed by Apple).</p>
+            <p class="store-google">Google Play refunds: Google Play Help or the orders and subscriptions section of your Google account (reviewed by Google).</p>
             <h3>3.7 Platform scope</h3>
-            <p>Subscriptions and IAP are currently available on iOS only. Other platforms will be announced when paid features launch there.</p>
+            <p class="store-apple">Membership subscriptions are currently available through the Apple App Store. Paid features on other platforms will be announced when they launch.</p>
+            <p class="store-google">Membership subscriptions are currently available through Google Play. Paid features on other platforms will be announced when they launch.</p>
         </div>
 
         <div class="section">
@@ -204,7 +229,13 @@
             <p>You must comply with all laws and regulations applicable to you. Do not use the App for illegal activity or input/prompt content that is unlawful or harmful (e.g., incitement to violence, terrorism, hate speech, sexual content involving minors, graphic violence, illegal gambling, drugs, or infringement of others’ rights).</p>
             <h3>4.2 Content responsibility</h3>
             <p>You are fully responsible for what you input and how you use or share AI-generated content. Do not use AI output to mislead others, impersonate real people, forge information, or for other improper purposes. Disputes or legal claims from your content or conduct are your responsibility.</p>
-            <h3>4.3 Prohibited conduct</h3>
+            <h3>4.3 Content safety and reporting</h3>
+            <ul>
+                <li>We may run on-device safety filters on AI-generated replies; matching content may be replaced with a safe reply. Filtering runs locally on your device.</li>
+                <li>You may long-press an AI message to report it. Reports upload the reported message text and related context (such as character type, timestamp, app version, and device platform) to our servers for review and safety handling.</li>
+                <li>We may restrict features, remove content, or suspend or terminate service based on law, this Agreement, and review outcomes.</li>
+            </ul>
+            <h3>4.4 Prohibited conduct</h3>
             <ul>
                 <li>Cracking, reverse engineering, or bypassing payment or quota limits;</li>
                 <li>Scripts, bots, or automation to abuse the service or quotas;</li>
@@ -234,7 +265,8 @@
             <h3>6.2 Service availability</h3>
             <p>We do not guarantee uninterrupted availability. Maintenance, upgrades, network issues, third-party failures (AI, cloud, app stores), or force majeure may cause outages or data issues; we are not liable beyond what law allows, but will use reasonable efforts to restore service.</p>
             <h3>6.3 Third-party services</h3>
-            <p>The App relies on Apple App Store, cloud services, third-party AI, weather data, and others. We are not responsible for third-party failures; their terms apply separately.</p>
+            <p class="store-apple">The App relies on the Apple App Store, cloud services, third-party AI, weather data, and others. We are not responsible for third-party failures; their terms apply separately.</p>
+            <p class="store-google">The App relies on Google Play, cloud services, third-party AI, weather data, and others. We are not responsible for third-party failures; their terms apply separately.</p>
             <h3>6.4 Limitation of liability</h3>
             <p>To the maximum extent permitted by law, our total liability to you for any claim does not exceed fees you actually paid for the App in the 12 months before the dispute. We are not liable for indirect, profit, data, or emotional damages.</p>
         </div>
@@ -245,8 +277,10 @@
         </div>
 
         <div class="section">
-            <h2>8. Apple Standard EULA</h2>
-            <p>Where applicable, Apple’s standard Licensed Application End User License Agreement: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a></p>
+            <h2 class="store-apple">8. App Store Terms</h2>
+            <p class="store-apple">When you download, install, or purchase through the App Store, you must also follow Apple’s applicable terms. Where applicable, Apple’s standard Licensed Application End User License Agreement: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a>.</p>
+            <h2 class="store-google">8. Google Play Terms</h2>
+            <p class="store-google">When you download, install, or purchase through Google Play, you must also follow Google Play’s applicable terms, as published by Google.</p>
         </div>
 
         <div class="section">

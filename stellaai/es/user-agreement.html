@@ -114,12 +114,29 @@
             h2 { font-size: 17px; }
         }
 
+
+        /* Default: Apple only. Android App/UA injects platform-android to show Google. */
+        .store-google { display: none !important; }
+        html.platform-android .store-google { display: revert !important; }
+        html.platform-android .store-apple { display: none !important; }
+
     </style>
+
+
+<script>
+(function () {
+  var html = document.documentElement;
+  if (html.classList.contains('platform-ios') || html.classList.contains('platform-android')) return;
+  var ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) html.classList.add('platform-android');
+  else html.classList.add('platform-ios');
+})();
+</script>
 </head>
 <body>
     <div class="container">
         <h1>Stella AI · Acuerdo de usuario</h1>
-        <p class="meta">Actualizado: 27 de septiembre de 2026 | Vigente: 27 de septiembre de 2026</p>
+        <p class="meta">Actualizado: 25 de noviembre de 2026 | Vigente: 25 de noviembre de 2026</p>
         <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">Versión internacional: se aplica a usuarios fuera de China continental. Prevalece la versión en inglés; las demás versiones lingüísticas son solo de referencia. Para usuarios en China continental se aplica la versión en chino simplificado.</p>
 
         <div class="intro">
@@ -132,7 +149,7 @@
             <p>Stella AI es una aplicación de acompañamiento emocional y chat con personajes virtuales impulsada por IA. Funciones principales:</p>
             <ul>
                 <li><strong>Chat con IA:</strong> conversaciones de texto con personajes virtuales según su personalidad y tono</li>
-                <li><strong>Configuración de personajes:</strong> elija personajes integrados (tsundere «Yu Han», gentil «Xiao Yu») y personalice nombre, cómo le llaman y etiquetas</li>
+                <li><strong>Configuración de personajes:</strong> elija entre personajes femeninos (p. ej. Yu Han, Xiao Yu, Xia You) y masculinos (p. ej. Shen Yan, Wen Yu, Lu Ye) y personalice nombre, cómo le llaman y etiquetas. Todos los personajes integrados son adultos</li>
                 <li><strong>Afecto y relación:</strong> nivel (Lv.1–100) y etapas (Primer encuentro, Familiaridad, Ambiguo, Confesión, Enamorados, Almas gemelas)</li>
                 <li><strong>Capítulos:</strong> historias generadas por IA que se desbloquean con el afecto</li>
                 <li><strong>Álbum de recuerdos:</strong> momentos destacados; puede ocultar o eliminar entradas</li>
@@ -167,7 +184,8 @@
             <h3>3.1 Cupo gratuito</h3>
             <p>Los no suscriptores tienen un número limitado de respuestas de IA (actualmente 50 respuestas del personaje). Luego se requiere suscripción. El cupo puede cambiar; prevalece lo mostrado en la App.</p>
             <h3>3.2 Planes</h3>
-            <p>En iOS, suscripciones de renovación automática vía App Store:</p>
+            <p class="store-apple">Suscripciones de renovación automática vía App Store:</p>
+            <p class="store-google">Suscripciones de renovación automática vía Google Play Billing:</p>
             <ul>
                 <li><strong>Mensual Light:</strong> chat ilimitado (precio según App/App Store)</li>
                 <li><strong>Mensual Deep:</strong> chat ilimitado y desbloqueo de todos los personajes (precio según App/App Store)</li>
@@ -175,19 +193,24 @@
             </ul>
             <h3>3.3 Renovación automática</h3>
             <ul>
-                <li>El cobro se realiza en su Apple ID al confirmar la compra.</li>
+                <li class="store-apple">El cobro se realiza en su Apple ID al confirmar la compra.</li>
+                <li class="store-google">El cobro se realiza en su cuenta de Google al confirmar la compra.</li>
                 <li>Salvo cancelación al menos <strong>24 horas antes</strong> del fin del periodo, se renueva automáticamente.</li>
-                <li>Gestione en <strong>Ajustes → Apple ID → Suscripciones</strong>.</li>
+                <li class="store-apple">Gestione en <strong>Ajustes → Apple ID → Suscripciones</strong>.</li>
+                <li class="store-google">Gestione en <strong>Google Play → Pagos y suscripciones → Suscripciones</strong>; o «Gestionar suscripción» en la app.</li>
                 <li>Cancelar en prueba gratuita termina la prueba; suele haber una prueba por grupo de suscripción.</li>
             </ul>
             <h3>3.4 Vinculación</h3>
-            <p><span class="highlight">Una suscripción de Apple solo puede vincularse a una cuenta Stella AI</span>. Use la cuenta con la que compró para conservar beneficios.</p>
+            <p class="store-apple"><span class="highlight">Una suscripción de App Store solo puede vincularse a una cuenta Stella AI</span>. Use la cuenta con la que compró para conservar beneficios.</p>
+            <p class="store-google"><span class="highlight">Una suscripción de Google Play solo puede vincularse a una cuenta Stella AI</span>. Use la cuenta con la que compró para conservar beneficios.</p>
             <h3>3.5 Restaurar compras</h3>
             <p>En la pantalla de suscripción, use «Restaurar compras», sujeto a las reglas de vinculación.</p>
             <h3>3.6 Reembolsos</h3>
-            <p>Según Apple, generalmente no reembolsable salvo que la ley lo exija. Solicite en <a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>.</p>
+            <p class="store-apple">Según Apple, generalmente no reembolsable salvo que la ley lo exija. Solicite en <a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>.</p>
+            <p class="store-google">Según Google, generalmente no reembolsable salvo que la ley lo exija. Solicite en la ayuda de Google Play o pedidos/suscripciones.</p>
             <h3>3.7 Plataformas</h3>
-            <p>Suscripciones disponibles actualmente solo en iOS.</p>
+            <p class="store-apple">Las suscripciones están disponibles en App Store.</p>
+            <p class="store-google">Las suscripciones están disponibles en Google Play.</p>
         </div>
         <div class="section">
             <h2>4. Conducta del usuario</h2>
@@ -195,7 +218,9 @@
             <p>Cumpla todas las leyes y normas que le sean aplicables. No use la App para actividades ilegales ni contenidos ilícitos.</p>
             <h3>4.2 Responsabilidad del contenido</h3>
             <p>Usted es responsable de lo que introduce y de cómo usa el contenido generado por IA.</p>
-            <h3>4.3 Conductas prohibidas</h3>
+            <h3>4.3 Seguridad del contenido e informes</h3>
+            <p>Pueden aplicarse filtros locales a las respuestas de IA. Mantenga pulsado un mensaje de IA para denunciarlo; el texto y el contexto se envían a nuestros servidores para revisión.</p>
+            <h3>4.4 Conductas prohibidas</h3>
             <ul>
                 <li>Eludir pagos o cupos, ingeniería inversa;</li>
                 <li>Bots o automatización abusiva;</li>
@@ -203,7 +228,7 @@
                 <li>Fraude, acoso o violación de privacidad;</li>
                 <li>Uso en dispositivos jailbreak/root o builds no oficiales.</li>
             </ul>
-            <h3>4.4 Cumplimiento</h3>
+            <h3>4.5 Cumplimiento</h3>
             <p>Podemos advertir, restringir, suspender o eliminar la cuenta sin reembolso.</p>
             <h3>4.5 Uso saludable</h3>
             <p>Fomentamos un uso moderado, no reemplazar la vida social real.</p>
@@ -222,7 +247,8 @@
             <h3>6.2 Disponibilidad</h3>
             <p>No garantizamos disponibilidad ininterrumpida; haremos esfuerzos razonables de restablecimiento.</p>
             <h3>6.3 Terceros</h3>
-            <p>App Store, nube, IA, clima, etc., se rigen por sus propios términos.</p>
+            <p class="store-apple">App Store, nube, IA, clima, etc., se rigen por sus propios términos.</p>
+            <p class="store-google">Google Play, nube, IA, clima, etc., se rigen por sus propios términos.</p>
             <h3>6.4 Límite de responsabilidad</h3>
             <p>En la máxima medida permitida por la ley, la responsabilidad total no supera lo pagado en los 12 meses previos al litigio.</p>
         </div>
@@ -230,9 +256,13 @@
             <h2>7. Privacidad</h2>
             <p>Consulte la Política de privacidad en la App.</p>
         </div>
-        <div class="section">
+        <div class="section store-apple">
             <h2>8. EULA de Apple</h2>
             <p><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a></p>
+        </div>
+        <div class="section store-google">
+            <h2>8. Condiciones de Google Play</h2>
+            <p>Al descargar o comprar a través de Google Play, se aplican las condiciones oficiales de Google.</p>
         </div>
         <div class="section">
             <h2>9. Cambios</h2>

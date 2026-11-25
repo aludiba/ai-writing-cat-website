@@ -114,18 +114,35 @@
             h2 { font-size: 17px; }
         }
 
+
+        /* Default: Apple only. Android App/UA injects platform-android to show Google. */
+        .store-google { display: none !important; }
+        html.platform-android .store-google { display: revert !important; }
+        html.platform-android .store-apple { display: none !important; }
+
     </style>
+
+
+<script>
+(function () {
+  var html = document.documentElement;
+  if (html.classList.contains('platform-ios') || html.classList.contains('platform-android')) return;
+  var ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) html.classList.add('platform-android');
+  else html.classList.add('platform-ios');
+})();
+</script>
 </head>
 <body>
 
     <div class="container">
         <h1>Stella AI · Privacy Policy</h1>
-        <p class="meta">Updated: November 5, 2026 | Effective: November 5, 2026</p>
+        <p class="meta">Updated: November 25, 2026 | Effective: November 25, 2026</p>
         <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">International Version: applies to users outside mainland China. The English version prevails; other language versions are for reference only. For users in mainland China, the Simplified Chinese version applies.</p>
 
         <div class="intro">
             <p>Stella AI (“App” or “we”) is an AI virtual-character emotional companionship and chat application. We process personal information in accordance with applicable data protection laws, including, where applicable, the EU General Data Protection Regulation and UK GDPR (“GDPR”), the California Consumer Privacy Act as amended (“CCPA”), Japan’s Act on the Protection of Personal Information, Korea’s Personal Information Protection Act, and the Personal Information Protection Law of the People’s Republic of China.</p>
-            <p>Please read this Policy before use, <span class="highlight">especially how chat is sent to third-party AI models, location for weather, camera/photo permissions, account deletion, and password reset</span>. If you disagree, stop using the App.</p>
+            <p>Please read this Policy before use, <span class="highlight">especially how chat is sent to third-party AI models, location for weather, camera/photo permissions, subscriptions and transactions, content reports, account deletion, and password reset</span>. If you disagree, stop using the App.</p>
         </div>
 
         <div class="section">
@@ -161,17 +178,24 @@
             </ul>
             <h3>1.5 Subscriptions and transactions</h3>
             <ul>
-                <li>Apple IAP receipts and original transaction ID</li>
-                <li>Product ID, subscription status, expiry, auto-renew status</li>
-                <li>We do <strong>not</strong> collect Apple ID passwords, card numbers, or payment passwords; Apple handles payment</li>
+                <li class="store-apple">App Store purchase identifiers: receipts and original transaction ID</li>
+                <li class="store-google">Google Play purchase identifiers: purchase tokens and the obfuscated account ID used for account binding (mapped to your Stella AI user ID)</li>
+                <li>Product ID, subscription status, expiry, auto-renew status, and purchase platform</li>
+                <li class="store-apple">We do <strong>not</strong> collect Apple ID passwords, card numbers, or payment passwords; Apple handles payment</li>
+                <li class="store-google">We do <strong>not</strong> collect Google account passwords, card numbers, or payment passwords; Google handles payment</li>
             </ul>
-            <h3>1.6 Device and logs</h3>
+            <h3>1.6 Content reports</h3>
+            <ul>
+                <li>When you long-press an AI message and submit a report, we collect: reported message text, report reason, message time, session ID, character type and name (if any), app version, and device platform</li>
+                <li>This data is stored in the cloud linked to your user ID for content review, safety handling, and dispute resolution</li>
+            </ul>
+            <h3>1.7 Device and logs</h3>
             <ul>
                 <li>Device model, OS version, app version, language and timezone (UI and local notifications)</li>
                 <li>Network status and IP address (logged when processing requests)</li>
                 <li>Crash/error logs and failed API records for stability</li>
             </ul>
-            <h3>1.7 What we do not collect</h3>
+            <h3>1.8 What we do not collect</h3>
             <ul>
                 <li>Contacts, SMS, call logs</li>
                 <li>Microphone/audio (no voice feature currently)</li>
@@ -196,7 +220,8 @@
             <h3>2.3 Security and compliance</h3>
             <ul>
                 <li>Detect abnormal login, quota abuse, cracking, misuse</li>
-                <li>Secure service and transactions; handle complaints and disputes</li>
+                <li>Secure service and transactions; handle complaints, reports, and disputes</li>
+                <li>Run on-device safety filters on AI-generated content to reduce harmful output risk</li>
                 <li>Comply with lawful regulatory requests</li>
             </ul>
             <h3>2.4 Improvement</h3>
@@ -208,8 +233,8 @@
             <h3>3.1 Where data lives</h3>
             <ul>
                 <li><strong>On device:</strong> chat history, character settings, mood, memories, relationship/chapter progress, preferences, weather cache, entitlement cache—in local DB and preferences</li>
-                <li><strong>Cloud:</strong> account (email, hashed password, user ID), avatar files, subscription records only</li>
-                <li><strong>Server locations:</strong> cloud data (account, avatar, subscription records) is hosted by Supabase on Amazon Web Services servers in India (Mumbai region); AI requests pass through our API relay server hosted on Alibaba Cloud and are processed by DeepSeek in mainland China (see Section 11)</li>
+                <li><strong>Cloud:</strong> account (email, hashed password, user ID), avatar files, subscription records, and content reports you submit</li>
+                <li><strong>Server locations:</strong> cloud data (account, avatar, subscription records, reports) is hosted by Supabase on Amazon Web Services servers in India (Mumbai region); AI requests pass through our API relay server hosted on Alibaba Cloud and are processed by DeepSeek in mainland China (see Section 11)</li>
             </ul>
             <h3>3.2 Chat storage (important)</h3>
             <p><span class="highlight">Chat with AI characters is stored locally on your device by default; our servers do not store chat body text.</span> To generate replies, and only after you agree in the App, your messages, needed context, and character settings are sent in real time to third-party AI (see Section 4). Uninstalling, clearing data, or changing devices may make local chat unrecoverable.</p>
@@ -218,6 +243,7 @@
                 <li>Account: until you delete the account</li>
                 <li>Avatar: until replaced or account deleted</li>
                 <li>Subscriptions: while active; transaction records may be kept as required by law</li>
+                <li>Content reports: retained as reasonably needed for review and safety handling, then deleted or anonymized per internal schedules unless law requires longer</li>
                 <li>Local data: until you delete in App, delete account, or uninstall</li>
                 <li>Logs: generally up to 6 months unless law requires longer</li>
             </ul>
@@ -249,16 +275,26 @@
             </ul>
             <h4>• Cloud provider (Supabase)</h4>
             <ul>
-                <li><strong>Shared:</strong> email, hashed password, user ID, avatar, subscription records</li>
-                <li><strong>Purpose:</strong> authentication, file storage, subscription sync</li>
+                <li><strong>Shared:</strong> email, hashed password, user ID, avatar, subscription records, content reports</li>
+                <li><strong>Purpose:</strong> authentication, file storage, subscription sync, and content safety handling</li>
                 <li><strong>Location:</strong> Amazon Web Services, India (Mumbai region)</li>
             </ul>
+            <div class="store-apple">
             <h4>• Apple</h4>
             <ul>
                 <li><strong>Shared:</strong> IAP/subscription requests, receipts, restore requests</li>
                 <li><strong>Purpose:</strong> payment, subscription management, entitlement verification; Apple’s privacy policy applies</li>
                 <li><strong>Subscription verification:</strong> our Supabase backend sends the transaction ID and Apple-signed subscription notifications to our verification server hosted on Alibaba Cloud, which queries Apple for the subscription status and returns it; the verification server does not store this data, and the subscription-to-account binding is stored in Supabase</li>
             </ul>
+            </div>
+            <div class="store-google">
+            <h4>• Google</h4>
+            <ul>
+                <li><strong>Shared:</strong> Google Play Billing requests, purchase tokens, restore-related information</li>
+                <li><strong>Purpose:</strong> payment, subscription management, entitlement verification; Google’s privacy policy applies</li>
+                <li><strong>Subscription verification:</strong> our servers may query the Google Play Developer API with the purchase token; subscription-to-account bindings are stored in Supabase</li>
+            </ul>
+            </div>
             <h4>• Weather and geolocation (Open-Meteo, BigDataCloud)</h4>
             <ul>
                 <li><strong>Shared:</strong> latitude/longitude when you authorize</li>
@@ -288,7 +324,8 @@
             <h3>5.4 Withdraw consent</h3>
             <ul>
                 <li><strong>AI data sharing:</strong> Settings → Privacy → Allow AI data sharing; after withdrawal no data is sent to the third-party AI</li>
-                <li><strong>Location:</strong> iPhone Settings → Privacy &amp; Security → Location Services → Stella AI</li>
+                <li class="store-apple"><strong>Location:</strong> turn off location permission for the App in system settings (Settings → Privacy &amp; Security → Location Services)</li>
+                <li class="store-google"><strong>Location:</strong> turn off location permission for the App in system settings (Settings → Apps → Stella AI → Permissions)</li>
                 <li><strong>Camera/Photos:</strong> revoke in system settings</li>
                 <li><strong>Notifications:</strong> disable in App or system settings</li>
             </ul>
@@ -299,7 +336,7 @@
 
         <div class="section">
             <h2>6. Minors</h2>
-            <p>This App is adult emotional companionship; <span class="highlight">we do not offer virtual partners or virtual intimate relationships to minors</span>. We do not knowingly collect minors’ personal information.</p>
+            <p>This App is adult emotional companionship; all built-in characters are adults. <span class="highlight">We do not offer virtual partners or virtual intimate relationships to minors</span>. We do not knowingly collect minors’ personal information.</p>
             <ul>
                 <li>Under 18: do not register or use the App.</li>
                 <li>If we collected a minor’s data without guardian consent, we will delete it and close the account promptly.</li>
@@ -319,7 +356,8 @@
 
         <div class="section">
             <h2>8. Third-party links</h2>
-            <p>The App may link to third parties (e.g. App Store, Apple subscription management). We are not responsible for their privacy practices; read their policies.</p>
+            <p class="store-apple">The App may link to third parties (e.g. the App Store and subscription management pages). We are not responsible for their privacy practices; read their policies.</p>
+            <p class="store-google">The App may link to third parties (e.g. Google Play and subscription management pages). We are not responsible for their privacy practices; read their policies.</p>
         </div>
 
         <div class="section">
@@ -343,7 +381,8 @@
             <ul>
                 <li><strong>India:</strong> account, avatar and subscription records (Supabase, hosted on Amazon Web Services, Mumbai region)</li>
                 <li><strong>Mainland China:</strong> chat text and context sent for AI generation (our API relay server on Alibaba Cloud, and DeepSeek); we do not persist chat body text on our server</li>
-                <li><strong>Other countries:</strong> Apple (payments and subscriptions) and weather/geocoding providers (Open-Meteo, BigDataCloud), under their own policies</li>
+                <li class="store-apple"><strong>Other countries:</strong> Apple (payments and subscriptions) and weather/geocoding providers (Open-Meteo, BigDataCloud), under their own policies</li>
+                <li class="store-google"><strong>Other countries:</strong> Google (payments and subscriptions) and weather/geocoding providers (Open-Meteo, BigDataCloud), under their own policies</li>
             </ul>
             <p>Although privacy laws differ by country, we require every processor receiving personal data to provide the same or an equivalent level of protection as required by this Policy. We apply safeguards such as data processing terms with our providers, encryption in transit, and data minimization, and where applicable we rely on your consent. Please note that when you use AI chat, your messages are sent to mainland China for processing. Contact us for more information about these safeguards.</p>
         </div>

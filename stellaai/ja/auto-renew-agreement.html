@@ -115,12 +115,29 @@
         }
 
     
+
+        /* Default: Apple only. Android App/UA injects platform-android to show Google. */
+        .store-google { display: none !important; }
+        html.platform-android .store-google { display: revert !important; }
+        html.platform-android .store-apple { display: none !important; }
+
     </style>
+
+
+<script>
+(function () {
+  var html = document.documentElement;
+  if (html.classList.contains('platform-ios') || html.classList.contains('platform-android')) return;
+  var ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) html.classList.add('platform-android');
+  else html.classList.add('platform-ios');
+})();
+</script>
 </head>
 <body>
     <div class="container">
         <h1>Stella AI · 自動更新サービス契約</h1>
-        <p class="meta">更新日：2026年9月15日　|　効力発生日：2026年9月15日</p>
+        <p class="meta">更新日：2026年11月25日　|　効力発生日：2026年11月25日</p>
         <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">国際版：中国本土以外のユーザーに適用されます。英語版が優先し、その他の言語版は参考訳です。中国本土のユーザーには簡体字中国語版が適用されます。</p>
 
         <div class="intro">
@@ -130,33 +147,33 @@
         <div class="section">
             <h2>1. サービス内容</h2>
             <h3>1.1 自動更新</h3>
-            <p>自動更新とは、App Store で自動更新サブスクリプションを購入した後、現行期間終了の少なくとも24時間前に解約しない限り、システムが自動で更新・課金し、特典を途切れなく継続することをいいます。</p>
+            <p>自動更新とは、<span class="store-apple">App Store で自動更新サブスクリプションを購入した後</span><span class="store-google">Google Play で自動更新サブスクリプションを購入した後</span>、現行期間終了の少なくとも24時間前に解約しない限り、システムが自動で更新・課金し、特典を途切れなく継続することをいいます。</p>
             <h3>1.2 プラン</h3>
-            <p>現在提供中の自動更新プラン（詳細は App Store を参照）：</p>
+            <p>現在提供中の自動更新プラン（詳細はご利用中のストアを参照）：</p>
             <ul>
                 <li><strong>ライト月額：</strong>1か月</li>
                 <li><strong>ディープ月額：</strong>1か月</li>
                 <li><strong>年額：</strong>1年（ディープの全特典）</li>
             </ul>
-            <p>価格・特典・キャンペーンは購入時の App Store およびアプリ表示に従います。</p>
+            <p>価格・通貨・特典・キャンペーンは購入時の該当ストアおよびアプリ表示に従います。</p>
             <h3>1.3 更新ルール</h3>
             <ul>
                 <li>更新期間は選択プランと同じです</li>
-                <li>更新価格は更新時点の App Store 表示価格です</li>
-                <li>価格変更時は Apple のルールに従い通知されます。効力発生前に解約できます</li>
+                <li>更新価格は更新時点の該当ストア表示価格です</li>
+                <li><span class="store-apple">価格変更時は Apple のルールに従い通知されます。効力発生前に解約できます</span><span class="store-google">価格変更時は Google のルールに従い通知されます。効力発生前に解約できます</span></li>
             </ul>
         </div>
         <div class="section">
             <h2>2. 課金</h2>
             <h3>2.1 課金タイミング</h3>
             <ul>
-                <li>初回購入は確認後ただちに Apple ID に請求されます</li>
+                <li><span class="store-apple">初回購入は確認後ただちに Apple ID に請求されます</span><span class="store-google">初回購入は確認後ただちに Google アカウントに請求されます</span></li>
                 <li>自動更新は現行期間終了の24時間以内に次期分が課金されます</li>
-                <li>正確な時刻は Apple が決定し、当社は制御できません</li>
+                <li>正確な時刻は該当ストアが決定し、当社は制御できません</li>
             </ul>
             <h3>2.2 支払い方法</h3>
             <ul>
-                <li>Apple ID に紐づく支払い方法で、Apple が処理します</li>
+                <li><span class="store-apple">Apple ID に紐づく支払い方法で、Apple が処理します</span><span class="store-google">Google アカウントに紐づく支払い方法で、Google が処理します</span></li>
                 <li>当社はカード情報や支払いパスワード等にアクセスできません</li>
                 <li>課金失敗時は、既払い期間終了とともに会員権が終了します</li>
             </ul>
@@ -171,8 +188,8 @@
             <h3>3.1 解約方法</h3>
             <p>いつでも解約できます。例：</p>
             <ul>
-                <li>iPhone の「設定」→ Apple ID →「サブスクリプション」→ Stella AI →「サブスクリプションをキャンセル」</li>
-                <li>または App Store アカウントのサブスクリプション管理から</li>
+                <li class="store-apple">設定 → Apple ID → サブスクリプション → Stella AI → キャンセル</li>
+                <li class="store-google">Google Play → お支払いと定期購入 → 定期購入 → Stella AI → 解約（会員中はアプリ内「サブスクリプションを管理」からも可）</li>
             </ul>
             <h3>3.2 解約後</h3>
             <ul>
@@ -184,29 +201,30 @@
         <div class="section">
             <h2>4. サブスクリプションとアカウントの紐づけ</h2>
             <ul>
-                <li>購入は Apple ID 経由で行われ、サーバー上で現在ログイン中の Stella AI アカウントに紐づきます</li>
-                <li><span class="highlight">1つの Apple サブスクリプションは通常1つの Stella AI アカウントにのみ紐づきます</span></li>
-                <li>アプリ内の「購入を復元」で有効期間内の購読を復元できます（上記紐づけルールの対象）</li>
+                <li>購入は該当ストアアカウント経由で行われ、サーバー上で現在ログイン中の Stella AI アカウントに紐づきます</li>
+                <li><span class="store-apple highlight">1つの App Store 購読は通常1つの Stella AI アカウントにのみ紐づきます</span><span class="store-google highlight">1つの Google Play 購読は通常1つの Stella AI アカウントにのみ紐づきます</span></li>
+                <li>アプリ内の「購入を復元」で端末上のストアアカウントから有効期間内の購読を復元できます（上記紐づけルールの対象）</li>
+                <li>購入した同一プラットフォームとストアアカウントで管理・解約・復元してください</li>
             </ul>
         </div>
         <div class="section">
             <h2>5. 返金</h2>
             <ul>
-                <li>Apple の方針により、法令に別段の定めがない限り、App Store の購読課金は原則返金されません</li>
-                <li>返金は Apple 公式（例：<a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>）で申請し、Apple が審査します</li>
-                <li>当社は App Store 返金を直接処理できません</li>
+                <li>公式ストアの購読課金は、法令に別段の定めがない限り原則返金されず、各ストアの返金ルールが適用されます</li>
+                <li><span class="store-apple">返金は App Store 公式チャネルで申請します（<a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>）。審査は Apple が行います</span><span class="store-google">返金は Google Play 公式チャネルで申請します（ヘルプまたは注文・定期購入）。審査は Google が行います</span></li>
+                <li>当社はストア返金を直接処理できません</li>
             </ul>
         </div>
         <div class="section">
             <h2>6. 変更と中断</h2>
             <ul>
                 <li>製品の進化に伴い特典内容を調整する場合があります。重要な変更はアプリ等でお知らせします</li>
-                <li>ネットワーク、保守、Apple 障害、不可抗力による中断については、合理的な範囲で復旧に努めますが、無中断は保証しません</li>
+                <li><span class="store-apple">ネットワーク、保守、Apple の障害、不可抗力による中断については</span><span class="store-google">ネットワーク、保守、Google の障害、不可抗力による中断については</span>、合理的な範囲で復旧に努めますが、無中断は保証しません</li>
             </ul>
         </div>
         <div class="section">
             <h2>7. 他の契約との関係</h2>
-            <p>本契約はユーザー契約の自動更新に関する補足です。未規定事項はユーザー契約・プライバシーポリシー・Apple 関連規約に従います。適用される場合の Apple 標準 EULA：<a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a></p>
+            <p>本契約はユーザー契約の自動更新に関する補足です。未規定事項はユーザー契約・プライバシーポリシー・該当アプリストア条件に従います。<span class="store-apple">適用される場合の Apple 標準 EULA：<a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a>。</span><span class="store-google">Google Play は Google の公式利用規約に従います。</span></p>
         </div>
         <div class="section">
             <h2>8. 本契約の変更</h2>

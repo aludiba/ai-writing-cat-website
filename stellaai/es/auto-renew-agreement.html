@@ -115,12 +115,29 @@
         }
 
     
+
+        /* Default: Apple only. Android App/UA injects platform-android to show Google. */
+        .store-google { display: none !important; }
+        html.platform-android .store-google { display: revert !important; }
+        html.platform-android .store-apple { display: none !important; }
+
     </style>
+
+
+<script>
+(function () {
+  var html = document.documentElement;
+  if (html.classList.contains('platform-ios') || html.classList.contains('platform-android')) return;
+  var ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) html.classList.add('platform-android');
+  else html.classList.add('platform-ios');
+})();
+</script>
 </head>
 <body>
     <div class="container">
         <h1>Stella AI · Acuerdo de renovación automática</h1>
-        <p class="meta">Actualizado: 15 de septiembre de 2026 | Vigente: 15 de septiembre de 2026</p>
+        <p class="meta">Actualizado: 25 de noviembre de 2026 | Vigente: 25 de noviembre de 2026</p>
         <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">Versión internacional: se aplica a usuarios fuera de China continental. Prevalece la versión en inglés; las demás versiones lingüísticas son solo de referencia. Para usuarios en China continental se aplica la versión en chino simplificado.</p>
 
         <div class="intro">
@@ -130,19 +147,20 @@
         <div class="section">
             <h2>1. Descripción del servicio</h2>
             <h3>1.1 Renovación automática</h3>
-            <p>La renovación automática significa que, tras comprar una suscripción renovable en App Store, salvo que cancele al menos 24 horas antes del fin del periodo actual, el sistema renovará y cobrará automáticamente para mantener la membresía sin interrupción.</p>
+            <p class="store-apple">La renovación automática significa que, tras comprar una suscripción renovable en App Store, salvo que cancele al menos 24 horas antes del fin del periodo actual, el sistema renovará y cobrará automáticamente para mantener la membresía sin interrupción.</p>
+            <p class="store-google">La renovación automática significa que, tras comprar una suscripción renovable en Google Play, salvo que cancele al menos 24 horas antes del fin del periodo actual, el sistema renovará y cobrará automáticamente para mantener la membresía sin interrupción.</p>
             <h3>1.2 Planes</h3>
-            <p>La App ofrece actualmente (ver App Store):</p>
+            <p>La App ofrece actualmente (ver la tienda de su plataforma):</p>
             <ul>
                 <li><strong>Mensual Light:</strong> periodo de 1 mes</li>
                 <li><strong>Mensual Deep:</strong> periodo de 1 mes</li>
                 <li><strong>Anual:</strong> periodo de 1 año (todos los beneficios Deep)</li>
             </ul>
-            <p>Precio, beneficios y promociones son los mostrados en App Store y en la App al comprar.</p>
+            <p>Precio, beneficios y promociones son los mostrados en la tienda correspondiente y en la App al comprar.</p>
             <h3>1.3 Reglas de renovación</h3>
             <ul>
                 <li>El periodo de renovación coincide con el plan elegido</li>
-                <li>El precio de renovación es el mostrado en App Store en el momento de renovar</li>
+                <li>El precio de renovación es el mostrado en la tienda correspondiente en el momento de renovar</li>
                 <li>Si cambia el precio, aplican las reglas de Apple; puede cancelar antes de que surta efecto</li>
             </ul>
         </div>
@@ -150,13 +168,15 @@
             <h2>2. Facturación</h2>
             <h3>2.1 Momento del cobro</h3>
             <ul>
-                <li>La compra inicial se carga de inmediato a su Apple ID al confirmar</li>
+                <li class="store-apple">La compra inicial se carga de inmediato a su Apple ID al confirmar</li>
+                <li class="store-google">La compra inicial se carga de inmediato a su cuenta de Google al confirmar</li>
                 <li>La renovación se cobra dentro de las 24 horas previas al fin del periodo</li>
                 <li>La hora exacta la determina Apple; no podemos controlarla</li>
             </ul>
             <h3>2.2 Método de pago</h3>
             <ul>
-                <li>Se usa el método de pago vinculado a su Apple ID y lo procesa Apple</li>
+                <li class="store-apple">Se usa el método de pago vinculado a su Apple ID y lo procesa Apple</li>
+                <li class="store-google">Se usa el método de pago vinculado a su cuenta de Google y lo procesa Google</li>
                 <li>No podemos acceder a tarjetas, contraseñas de pago u otras credenciales</li>
                 <li>Si falla el cobro, la membresía termina al expirar el periodo ya pagado</li>
             </ul>
@@ -171,8 +191,9 @@
             <h3>3.1 Cómo cancelar</h3>
             <p>Puede cancelar en cualquier momento, por ejemplo:</p>
             <ul>
-                <li>Ajustes del iPhone → Apple ID → Suscripciones → Stella AI → Cancelar suscripción</li>
-                <li>O mediante la gestión de suscripciones de la cuenta de App Store</li>
+                <li class="store-apple">Ajustes → Apple ID → Suscripciones → Stella AI → Cancelar</li>
+                <li class="store-google">Google Play → Pagos y suscripciones → Suscripciones → Stella AI → Cancelar (o «Gestionar suscripción» en la app)</li>
+                <li>O mediante la gestión de suscripciones de la cuenta de la tienda</li>
             </ul>
             <h3>3.2 Tras cancelar</h3>
             <ul>
@@ -184,7 +205,7 @@
         <div class="section">
             <h2>4. Vinculación suscripción / cuenta</h2>
             <ul>
-                <li>La compra se hace con Apple ID y se vincula en nuestros servidores a su cuenta Stella AI iniciada</li>
+                <li>La compra se hace con la cuenta de la tienda y se vincula en nuestros servidores a su cuenta Stella AI iniciada</li>
                 <li><span class="highlight">Una suscripción de Apple suele vincularse a una sola cuenta Stella AI</span></li>
                 <li>Use «Restaurar compras» en la App para restaurar suscripciones vigentes, sujeto a las reglas de vinculación</li>
             </ul>
@@ -192,9 +213,10 @@
         <div class="section">
             <h2>5. Reembolsos</h2>
             <ul>
-                <li>Según la política de Apple, los cargos de suscripción de App Store generalmente no son reembolsables, salvo que la ley lo exija</li>
-                <li>Solicite reembolsos vía Apple (p. ej. <a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>); Apple revisa la solicitud</li>
-                <li>No podemos procesar reembolsos de App Store directamente</li>
+                <li>Según la política de la tienda, los cargos de suscripción generalmente no son reembolsables, salvo que la ley lo exija</li>
+                <li class="store-apple">Solicite reembolsos vía App Store (<a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>); Apple revisa la solicitud</li>
+                <li class="store-google">Solicite reembolsos vía Google Play (ayuda o pedidos/suscripciones); Google revisa la solicitud</li>
+                <li>No podemos procesar reembolsos de la tienda directamente</li>
             </ul>
         </div>
         <div class="section">
@@ -206,7 +228,7 @@
         </div>
         <div class="section">
             <h2>7. Relación con otros acuerdos</h2>
-            <p>Este Acuerdo complementa el Acuerdo de usuario sobre renovación automática. Lo no regulado se rige por el Acuerdo de usuario, la Política de privacidad y los términos de Apple. Cuando proceda, EULA de Apple: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a></p>
+            <p>Este Acuerdo complementa el Acuerdo de usuario sobre renovación automática. Lo no regulado se rige por el Acuerdo de usuario, la Política de privacidad y los términos de la tienda de aplicaciones correspondiente. Cuando proceda, EULA de Apple: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a></p>
         </div>
         <div class="section">
             <h2>8. Cambios de este Acuerdo</h2>

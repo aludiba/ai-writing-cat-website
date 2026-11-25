@@ -114,12 +114,29 @@
             h2 { font-size: 17px; }
         }
 
+
+        /* Default: Apple only. Android App/UA injects platform-android to show Google. */
+        .store-google { display: none !important; }
+        html.platform-android .store-google { display: revert !important; }
+        html.platform-android .store-apple { display: none !important; }
+
     </style>
+
+
+<script>
+(function () {
+  var html = document.documentElement;
+  if (html.classList.contains('platform-ios') || html.classList.contains('platform-android')) return;
+  var ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) html.classList.add('platform-android');
+  else html.classList.add('platform-ios');
+})();
+</script>
 </head>
 <body>
     <div class="container">
         <h1>Stella AI · Conditions d'utilisation</h1>
-        <p class="meta">Mise à jour : 27 septembre 2026 | Entrée en vigueur : 27 septembre 2026</p>
+        <p class="meta">Mise à jour : 25 novembre 2026 | Entrée en vigueur : 25 novembre 2026</p>
         <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">Version internationale : s’applique aux utilisateurs situés hors de Chine continentale. La version anglaise prévaut ; les autres versions linguistiques sont fournies à titre indicatif. Pour les utilisateurs en Chine continentale, la version en chinois simplifié s’applique.</p>
 
         <div class="intro">
@@ -132,7 +149,7 @@
             <p>Stella AI est une application d’accompagnement émotionnel et de discussion avec des personnages virtuels alimentés par l’intelligence artificielle. Fonctions principales :</p>
             <ul>
                 <li><strong>Discussion IA :</strong> conversations textuelles avec des personnages virtuels selon leur personnalité et leur ton</li>
-                <li><strong>Configuration des personnages :</strong> choisir les personnages intégrés (tsundere « Yu Han », douce « Xiao Yu ») et personnaliser le nom, la façon dont ils vous appellent et les tags de personnalité</li>
+                <li><strong>Configuration des personnages :</strong> choisir parmi des personnages féminins (ex. Yu Han, Xiao Yu, Xia You) et masculins (ex. Shen Yan, Wen Yu, Lu Ye), et personnaliser le nom, la façon dont ils vous appellent et les tags. Tous les personnages intégrés sont des adultes</li>
                 <li><strong>Affection et relation :</strong> niveau d’affection (Lv.1–100) et étapes (Première rencontre, Familiarité, Ambiguïté, Confession, Amoureux, Âmes sœurs)</li>
                 <li><strong>Chapitres d’histoire :</strong> histoires générées par IA, débloquées avec l’affection</li>
                 <li><strong>Album de souvenirs :</strong> moments marquants ; vous pouvez masquer ou supprimer des entrées</li>
@@ -167,7 +184,8 @@
             <h3>3.1 Quota gratuit</h3>
             <p>Les non-abonnés disposent d’un nombre limité de réponses IA (actuellement 50 réponses générées par le personnage ; vos messages ne sont pas comptés). Ensuite, un abonnement est requis. Le quota peut évoluer ; l’affichage dans l’App fait foi.</p>
             <h3>3.2 Formules</h3>
-            <p>Sur iOS, l’App propose des abonnements à renouvellement automatique via les achats intégrés App Store :</p>
+            <p class="store-apple">L’App propose des abonnements à renouvellement automatique via l’App Store :</p>
+            <p class="store-google">L’App propose des abonnements à renouvellement automatique via Google Play Billing :</p>
             <ul>
                 <li><strong>Mensuel Light :</strong> discussions illimitées (prix affiché dans l’App et l’App Store)</li>
                 <li><strong>Mensuel Deep :</strong> discussions illimitées et déblocage de tous les personnages (prix affiché dans l’App et l’App Store)</li>
@@ -176,20 +194,26 @@
             <p>Prix, période, essai gratuit et avantages sont ceux affichés dans l’App et l’App Store. Un essai gratuit peut s’appliquer selon les règles Apple.</p>
             <h3>3.3 Renouvellement automatique</h3>
             <ul>
-                <li>Les frais sont débités sur votre Apple ID à la confirmation d’achat.</li>
+                <li class="store-apple">Les frais sont débités sur votre Apple ID à la confirmation d’achat.</li>
+                <li class="store-google">Les frais sont débités sur votre compte Google à la confirmation d’achat.</li>
                 <li>Sauf annulation au moins <strong>24 heures avant</strong> la fin de la période, l’abonnement se renouvelle automatiquement et vous êtes débité à nouveau.</li>
                 <li>Le renouvellement est débité dans les 24 heures précédant la fin de la période.</li>
-                <li>Gérez ou annulez dans <strong>Réglages iPhone → Apple ID → Abonnements</strong>. Après annulation, les avantages restent jusqu’à la fin de la période payée.</li>
+                <li class="store-apple">Gérez ou annulez dans <strong>Réglages → Apple ID → Abonnements</strong>. Après annulation, les avantages restent jusqu’à la fin de la période payée.</li>
+                <li class="store-google">Gérez ou annulez dans <strong>Google Play → Paiements et abonnements → Abonnements</strong> ; ou « Gérer l’abonnement » dans l’app. Après annulation, les avantages restent jusqu’à la fin de la période payée.</li>
                 <li>Annuler pendant un essai gratuit met fin à l’essai ; en général un essai par utilisateur et par groupe d’abonnements.</li>
             </ul>
             <h3>3.4 Liaison abonnement / compte</h3>
-            <p>Les achats IAP Apple sont liés côté serveur à votre <strong>compte Stella AI connecté</strong>. <span class="highlight">Un abonnement Apple ne peut être lié qu’à un seul compte Stella AI</span>. Si vous vous connectez avec un autre compte et restaurez, le message peut indiquer que l’abonnement est lié ailleurs — reconnectez-vous avec le compte d’achat.</p>
+            <p class="store-apple">Les achats IAP Apple sont liés côté serveur à votre <strong>compte Stella AI connecté</strong>. <span class="highlight">Un abonnement App Store ne peut être lié qu’à un seul compte Stella AI</span>. Si vous vous connectez avec un autre compte et restaurez, le message peut indiquer que l’abonnement est lié ailleurs — reconnectez-vous avec le compte d’achat.</p>
+            <p class="store-google">Les achats Google Play sont liés côté serveur à votre <strong>compte Stella AI connecté</strong>. <span class="highlight">Un abonnement Google Play ne peut être lié qu’à un seul compte Stella AI</span>. Si vous vous connectez avec un autre compte et restaurez, le message peut indiquer que l’abonnement est lié ailleurs — reconnectez-vous avec le compte d’achat.</p>
             <h3>3.5 Restaurer les achats</h3>
-            <p>Sur l’écran d’abonnement, touchez « Restaurer les achats » pour restaurer les abonnements valides liés à votre Apple ID, sous réserve des règles de liaison.</p>
+            <p class="store-apple">Sur l’écran d’abonnement, touchez « Restaurer les achats » pour restaurer les abonnements valides liés à votre Apple ID, sous réserve des règles de liaison.</p>
+            <p class="store-google">Sur l’écran d’abonnement, touchez « Restaurer les achats » pour restaurer les abonnements valides liés à votre compte Google, sous réserve des règles de liaison.</p>
             <h3>3.6 Remboursements</h3>
-            <p>Selon Apple, les abonnements App Store ne sont en général pas remboursables, sauf obligation légale. Demandez via Apple (<a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>) ; nous ne pouvons pas traiter directement les remboursements App Store.</p>
+            <p class="store-apple">Selon Apple, les abonnements App Store ne sont en général pas remboursables, sauf obligation légale. Demandez via Apple (<a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>) ; nous ne pouvons pas traiter directement les remboursements App Store.</p>
+            <p class="store-google">Les abonnements Google Play ne sont en général pas remboursables, sauf obligation légale. Demandez via Google Play Aide ou commandes/abonnements ; nous ne pouvons pas traiter directement les remboursements Google Play.</p>
             <h3>3.7 Plateformes</h3>
-            <p>Abonnements et IAP sont actuellement disponibles sur iOS uniquement. Les autres plateformes seront annoncées le cas échéant.</p>
+            <p class="store-apple">Abonnements et IAP sont actuellement disponibles via l’App Store. Les autres plateformes seront annoncées le cas échéant.</p>
+            <p class="store-google">Abonnements sont actuellement disponibles via Google Play. Les autres plateformes seront annoncées le cas échéant.</p>
         </div>
         <div class="section">
             <h2>4. Conduite de l’utilisateur</h2>
@@ -197,7 +221,9 @@
             <p>Respectez toutes les lois et réglementations qui vous sont applicables. N’utilisez pas l’App pour des activités illégales ni pour saisir/inciter à des contenus illicites ou nuisibles.</p>
             <h3>4.2 Responsabilité du contenu</h3>
             <p>Vous êtes responsable de vos saisies et de l’usage ou du partage du contenu généré par l’IA. Ne l’utilisez pas pour tromper, usurper une identité, falsifier des informations ou d’autres fins illicites.</p>
-            <h3>4.3 Interdictions</h3>
+            <h3>4.3 Sécurité du contenu et signalement</h3>
+            <p>Des filtres locaux peuvent s’appliquer aux réponses IA. Un appui long sur un message IA permet de le signaler ; le texte et le contexte sont envoyés à nos serveurs pour examen.</p>
+            <h3>4.4 Interdictions</h3>
             <ul>
                 <li>Contourner les limites de paiement ou de quota, reverse engineering ;</li>
                 <li>Scripts, bots ou automatisation abusifs ;</li>
@@ -205,7 +231,7 @@
                 <li>Fraude, harcèlement, atteintes à la vie privée via l’IA ;</li>
                 <li>Usage sur appareils jailbreakés/rootés ou builds non officiels.</li>
             </ul>
-            <h3>4.4 Sanctions</h3>
+            <h3>4.5 Sanctions</h3>
             <p>En cas de violation, nous pouvons avertir, restreindre, suspendre ou résilier le service, ou supprimer le compte sans remboursement. Vous assumez les pertes.</p>
             <h3>4.5 Usage sain</h3>
             <p>Nous encourageons un usage modéré — pas un substitut à la vie sociale réelle ni une dépendance. Gérez votre temps. L’App peut suggérer des pauses après une longue session.</p>
@@ -225,7 +251,8 @@
             <h3>6.2 Disponibilité</h3>
             <p>Nous ne garantissons pas une disponibilité ininterrompue. Maintenance, réseau, tiers (IA, cloud, stores) ou force majeure peuvent causer des interruptions ; dans les limites de la loi, nous ferons des efforts raisonnables pour rétablir le service.</p>
             <h3>6.3 Services tiers</h3>
-            <p>L’App s’appuie sur App Store, cloud, IA tierce, météo, etc. Nous ne sommes pas responsables des défaillances de tiers ; leurs conditions s’appliquent.</p>
+            <p class="store-apple">L’App s’appuie sur App Store, cloud, IA tierce, météo, etc. Nous ne sommes pas responsables des défaillances de tiers ; leurs conditions s’appliquent.</p>
+            <p class="store-google">L’App s’appuie sur Google Play, cloud, IA tierce, météo, etc. Nous ne sommes pas responsables des défaillances de tiers ; leurs conditions s’appliquent.</p>
             <h3>6.4 Limitation de responsabilité</h3>
             <p>Dans les limites maximales autorisées par la loi, notre responsabilité totale ne dépasse pas les sommes que vous avez réellement payées pour l’App au cours des 12 mois précédant le litige. Pas de responsabilité pour dommages indirects, perte de profits, de données ou préjudice émotionnel.</p>
         </div>
@@ -233,9 +260,13 @@
             <h2>7. Confidentialité</h2>
             <p>Consultez la Politique de confidentialité dans l’App. Pour les données personnelles non couvertes ici, cette politique prévaut.</p>
         </div>
-        <div class="section">
+        <div class="section store-apple">
             <h2>8. EULA Apple</h2>
             <p>Le cas échéant : <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a></p>
+        </div>
+        <div class="section store-google">
+            <h2>8. Conditions Google Play</h2>
+            <p>Lorsque vous téléchargez ou achetez via Google Play, les conditions officielles de Google s’appliquent.</p>
         </div>
         <div class="section">
             <h2>9. Modifications et entrée en vigueur</h2>

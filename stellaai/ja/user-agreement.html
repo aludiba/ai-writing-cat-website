@@ -114,12 +114,29 @@
             h2 { font-size: 17px; }
         }
 
+
+        /* Default: Apple only. Android App/UA injects platform-android to show Google. */
+        .store-google { display: none !important; }
+        html.platform-android .store-google { display: revert !important; }
+        html.platform-android .store-apple { display: none !important; }
+
     </style>
+
+
+<script>
+(function () {
+  var html = document.documentElement;
+  if (html.classList.contains('platform-ios') || html.classList.contains('platform-android')) return;
+  var ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) html.classList.add('platform-android');
+  else html.classList.add('platform-ios');
+})();
+</script>
 </head>
 <body>
     <div class="container">
         <h1>Stella AI · ユーザー契約</h1>
-        <p class="meta">更新日：2026年9月27日　|　効力発生日：2026年9月27日</p>
+        <p class="meta">更新日：2026年11月25日　|　効力発生日：2026年11月25日</p>
         <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">国際版：中国本土以外のユーザーに適用されます。英語版が優先し、その他の言語版は参考訳です。中国本土のユーザーには簡体字中国語版が適用されます。</p>
 
         <div class="intro">
@@ -132,7 +149,7 @@
             <p>Stella AI は AI による仮想キャラクター感情同伴・会話アプリです。主な機能：</p>
             <ul>
                 <li><strong>AI 会話：</strong>設定された性格・口調に沿ったテキスト会話</li>
-                <li><strong>キャラ設定：</strong>内蔵キャラ（ツンデレ「語寒」、優しい「小雨」）の選択と名前・呼び方・タグのカスタム</li>
+                <li><strong>キャラ設定：</strong>女性キャラ（例：語寒・小雨・夏柚）と男性キャラ（例：沈硯・温嶼・陸野）など内蔵キャラの選択と名前・呼び方・タグのカスタム。内蔵キャラはいずれも成人設定</li>
                 <li><strong>好感度と関係：</strong>Lv.1–100、関係段階（初対面〜ソウルメイト）</li>
                 <li><strong>章ストーリー：</strong>好感度に応じて解放される AI ストーリー</li>
                 <li><strong>思い出アルバム：</strong>ハイライトの整理、非表示・削除可</li>
@@ -166,21 +183,29 @@
             <h3>3.1 無料枠</h3>
             <p>未購読時は AI 返信に上限（現在 キャラ返信 50 回）。以降は購読が必要です。表示はアプリ内が基準です。</p>
             <h3>3.2 プラン</h3>
+            <p><span class="store-apple">App Store で自動更新サブスクリプション</span><span class="store-google">Google Play Billing で自動更新サブスクリプション</span>を提供します。</p>
             <ul>
-                <li><strong>ライト月額：</strong>無制限チャット（価格は App/App Store 表示）</li>
-                <li><strong>ディープ月額：</strong>無制限チャット、全キャラ解放（価格は App/App Store 表示）</li>
-                <li><strong>年額：</strong>ディープ月額の全特典に加え、好感度アップが速くなります（価格は App/App Store 表示）</li>
+                <li><strong>ライト月額：</strong>無制限チャット</li>
+                <li><strong>ディープ月額：</strong>無制限チャット、全キャラ解放</li>
+                <li><strong>年額：</strong>ディープ月額の全特典に加え、好感度アップが速くなります</li>
             </ul>
+            <p>価格・通貨・特典は購入時のアプリ／ストア表示に従います。</p>
             <h3>3.3 自動更新</h3>
             <ul>
-                <li>購入確定時に Apple ID へ請求</li>
+                <li class="store-apple">購入確定時に Apple ID へ請求</li>
+                <li class="store-google">購入確定時に Google アカウントへ請求</li>
                 <li>期間終了の<strong>少なくとも 24 時間前</strong>に解約しない限り自動更新</li>
-                <li>管理：<strong>設定 → Apple ID → サブスクリプション</strong></li>
+                <li class="store-apple">管理：<strong>設定 → Apple ID → サブスクリプション</strong></li>
+                <li class="store-google">管理：<strong>Google Play → お支払いと定期購入 → 定期購入</strong>（会員中はアプリ内「サブスクリプションを管理」からも遷移可）</li>
             </ul>
             <h3>3.4 紐づけ</h3>
-            <p><span class="highlight">1 つの Apple 購読は 1 つの Stella AI アカウントにのみ紐づきます</span>。</p>
+            <p class="store-apple"><span class="highlight">1 つの App Store 購読は 1 つの Stella AI アカウントにのみ紐づきます</span>。購入した Apple ID で管理・復元してください。</p>
+            <p class="store-google"><span class="highlight">1 つの Google Play 購読は 1 つの Stella AI アカウントにのみ紐づきます</span>。購入した Google アカウントで管理・復元してください。</p>
             <h3>3.5 購入の復元 / 3.6 返金 / 3.7 対応 OS</h3>
-            <p>復元はアプリ内から。返金は原則 Apple（<a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>）。現在 iOS のみ。</p>
+            <p class="store-apple">復元はアプリ内から。返金は App Store 公式チャネル（<a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>）へ。現在 App Store で提供。</p>
+            <p class="store-google">復元はアプリ内から。返金は Google Play 公式チャネル（ヘルプまたはアカウントの注文・定期購入）へ。現在 Google Play で提供。</p>
+            <h3>3.8 コンテンツ安全と通報</h3>
+            <p>AI 生成内容に端末内フィルタをかける場合があります。AI メッセージを長押しして通報でき、通報内容は審査のためサーバーへ送信されます。</p>
         </div>
         <div class="section">
             <h2>4. 利用者の行為規範</h2>
@@ -195,7 +220,8 @@
             <p>AI 出力は<strong>誤り・不正確・不適切となり得ます</strong>。助言ではありません。無中断は保証しません。第三者障害や不可抗力について、法が許す範囲で責任を負いません。賠償総額は紛争前 12 か月の実支払額を上限とします。</p>
         </div>
         <div class="section"><h2>7. プライバシー</h2><p>アプリ内のプライバシーポリシーをご覧ください。</p></div>
-        <div class="section"><h2>8. Apple 標準 EULA</h2><p><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a></p></div>
+        <div class="section store-apple"><h2>8. Apple 標準 EULA</h2><p><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a></p></div>
+        <div class="section store-google"><h2>8. Google Play 利用規約</h2><p>Google Play の公式利用規約に従ってください。</p></div>
         <div class="section"><h2>9. 変更と効力</h2><p>法令・製品に応じて改定できます。継続利用は改定への同意とみなします。</p></div>
         <div class="section"><h2>10. 準拠法・紛争解決</h2>
             <p>本契約は、抵触法の規定を除き、中華人民共和国（中国本土）の法令に準拠します。</p>

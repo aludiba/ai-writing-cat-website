@@ -114,12 +114,29 @@
             h2 { font-size: 17px; }
         }
 
+
+        /* Default: Apple only. Android App/UA injects platform-android to show Google. */
+        .store-google { display: none !important; }
+        html.platform-android .store-google { display: revert !important; }
+        html.platform-android .store-apple { display: none !important; }
+
     </style>
+
+
+<script>
+(function () {
+  var html = document.documentElement;
+  if (html.classList.contains('platform-ios') || html.classList.contains('platform-android')) return;
+  var ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) html.classList.add('platform-android');
+  else html.classList.add('platform-ios');
+})();
+</script>
 </head>
 <body>
     <div class="container">
         <h1>Stella AI · プライバシーポリシー</h1>
-        <p class="meta">更新日：2026年11月5日　|　効力発生日：2026年11月5日</p>
+        <p class="meta">更新日：2026年11月25日　|　効力発生日：2026年11月25日</p>
         <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">国際版：中国本土以外のユーザーに適用されます。英語版が優先し、その他の言語版は参考訳です。中国本土のユーザーには簡体字中国語版が適用されます。</p>
 
         <div class="intro">
@@ -133,7 +150,8 @@
                 <li>チャット本文・キャラ設定・気分記録・思い出・関係/章の進捗</li>
                 <li>位置（任意・天気のみ。座標は Stella AI サーバーに保存しません）</li>
                 <li>カメラ/写真（アバター選択時のみ）</li>
-                <li>Apple IAP レシート・購読状態（Apple ID パスワードやカードは収集しません）</li>
+                <li><span class="store-apple">ストア購読情報：Apple IAP レシート／取引 ID。購読状態・期限・プラットフォーム。Apple ID パスワードやカードは収集しません</span><span class="store-google">ストア購読情報：Google Play purchaseToken とアカウント紐づけ用 obfuscated account id。購読状態・期限・プラットフォーム。Google アカウントパスワードやカードは収集しません</span></li>
+                <li>コンテンツ通報：通報した AI メッセージ本文、理由、時刻、キャラ種別、アプリ版、端末プラットフォーム（審査・安全対応のためクラウド保存）</li>
                 <li>端末・OS・アプリ版・言語/タイムゾーン・ネットワーク/IP・クラッシュログ</li>
             </ul>
             <p><span class="highlight">チャットに身分証・カード・パスワード等の機密を入力しないでください。</span></p>
@@ -145,14 +163,15 @@
         </div>
         <div class="section">
             <h2>3. 保存と安全</h2>
-            <p>チャット等は原則端末ローカル。クラウドはアカウント・アバター・購読記録のみ。クラウドデータは Supabase（Amazon Web Services インド・ムンバイ リージョン）に保存され、AI リクエストは阿里雲（Alibaba Cloud）上の当社中継サーバーを経由して中国本土の DeepSeek が処理します（第11条参照）。<span class="highlight">チャット本文は当社サーバーに保存しません</span>が、アプリ内で同意いただいた場合に限り、生成のため第三者 AI へリアルタイム送信します。アンインストール等でローカル履歴は復元できない場合があります。「パスワードを忘れた」は現行版で<strong>旧パスワードもメール認証コードも不要</strong>です。メール管理にご注意ください。</p>
+            <p>チャット等は原則端末ローカル。クラウドはアカウント・アバター・購読記録・通報記録。クラウドデータは Supabase（Amazon Web Services インド・ムンバイ リージョン）に保存され、AI リクエストは阿里雲（Alibaba Cloud）上の当社中継サーバーを経由して中国本土の DeepSeek が処理します（第11条参照）。<span class="highlight">チャット本文は当社サーバーに保存しません</span>が、アプリ内で同意いただいた場合に限り、生成のため第三者 AI へリアルタイム送信します。アンインストール等でローカル履歴は復元できない場合があります。「パスワードを忘れた」は現行版で<strong>旧パスワードもメール認証コードも不要</strong>です。メール管理にご注意ください。</p>
         </div>
         <div class="section">
             <h2>4. 共有と第三者</h2>
             <ul>
                 <li><strong>DeepSeek（Hangzhou DeepSeek Artificial Intelligence Co., Ltd.、中国本土で処理）：</strong>キャラクターに送ったメッセージと返信生成に必要な最近の会話内容、キャラクター設定（名前・あなたの呼び名・性格タグ）、気分を記録したときの気分スコアとメモ、毎日のあいさつ用の時間帯と天気の概要（都市名・座標は含まない）。返信の生成のためだけに api.hujiaofenwritingcat.top 経由で送信します。<span class="highlight">送信前に、送信するデータと送信先を説明する専用の案内をアプリ内で表示し、許可を求めます。同意するまで DeepSeek には何も送信しません。</span>「設定 → プライバシー → AIへのデータ共有を許可」からいつでも撤回できます。適用される契約・サービス条件により、目的制限、秘密保持、安全措置、処理終了後の削除または返還を含め、本ポリシーと同等以上の保護を共有データに提供するよう DeepSeek に求めます。メールアドレス、アバター、都市名や正確な位置、連絡先、支払い情報は送信しません</li>
-                <li><strong>Supabase：</strong>認証・ファイル・購読同期（Amazon Web Services インド・ムンバイ リージョン）</li>
-                <li><strong>Apple：</strong>IAP/購読/復元。購読の検証では、Supabase 上の当社バックエンドが取引 ID と Apple 署名付き購読通知を阿里雲上の当社検証サーバーへ送信し、同サーバーが Apple に購読状態を照会して返します（同サーバーはデータを保存しません）。購読とアカウントの紐付けは Supabase に保存されます</li>
+                <li><strong>Supabase：</strong>認証・ファイル・購読同期・通報保管（Amazon Web Services インド・ムンバイ リージョン）</li>
+                <li class="store-apple"><strong>Apple：</strong>IAP/購読/復元。購読の検証では、Supabase 上の当社バックエンドが取引 ID と Apple 署名付き購読通知を阿里雲上の当社検証サーバーへ送信し、同サーバーが Apple に購読状態を照会して返します（同サーバーはデータを保存しません）。購読とアカウントの紐付けは Supabase に保存されます</li>
+                <li class="store-google"><strong>Google：</strong>Google Play Billing／purchaseToken／復元関連。購読検証のため Google Play Developer API を照会する場合があります。購読とアカウントの紐づけは Supabase に保存</li>
                 <li><strong>Open-Meteo / BigDataCloud：</strong>認可時の緯度経度</li>
             </ul>
             <p>個人情報は販売しません。法令に基づく開示や事業承継時の引継ぎがあり得ます。</p>
@@ -163,7 +182,7 @@
         </div>
         <div class="section"><h2>6. 未成年者</h2><p><span class="highlight">未成年者向け仮想パートナーは提供しません</span>。</p></div>
         <div class="section"><h2>7. AI に関する注意</h2><p>仮想キャラであり実在の人ではありません。専門的助言ではありません。</p></div>
-        <div class="section"><h2>8. 第三者リンク</h2><p>App Store 等は各社ポリシーに従います。</p></div>
+        <div class="section"><h2>8. 第三者リンク</h2><p class="store-apple">App Store 等は各社ポリシーに従います。</p><p class="store-google">Google Play 等は各社ポリシーに従います。</p></div>
         <div class="section"><h2>9. 変更</h2><p>重要な変更はアプリ内で告知し、必要に応じ再同意を求めます。</p></div>
         <div class="section"><h2>10. お問い合わせ</h2><ul><li><strong>メール：</strong>869922457@qq.com</li><li><strong>アプリ内：</strong>マイページ → アプリについて</li></ul></div>
         <div class="section"><h2>11. 国際的なデータ移転</h2>
@@ -171,7 +190,8 @@
             <ul>
                 <li><strong>インド：</strong>アカウント・アバター・購読記録（Supabase、Amazon Web Services ムンバイ リージョン）</li>
                 <li><strong>中国本土：</strong>AI 生成のために送信されるチャット本文と文脈（阿里雲上の当社中継サーバーおよび DeepSeek）。当社サーバーにチャット本文は保存しません</li>
-                <li><strong>その他の国：</strong>Apple（決済・購読）、天気・ジオコーディング事業者（Open-Meteo、BigDataCloud）。各社のポリシーに従います</li>
+                <li class="store-apple"><strong>その他の国：</strong>Apple（決済・購読）、天気・ジオコーディング事業者（Open-Meteo、BigDataCloud）。各社のポリシーに従います</li>
+                <li class="store-google"><strong>その他の国：</strong>Google（決済・購読）、天気・ジオコーディング事業者（Open-Meteo、BigDataCloud）。各社のポリシーに従います</li>
             </ul>
             <p>国により法制度は異なりますが、個人データを受け取るすべての処理者に本ポリシーと同等以上の保護を求めます。委託先との契約上のデータ取扱条件、通信の暗号化、データの最小化などの措置を講じ、必要に応じてお客様の同意に基づき移転します。AI チャットをご利用の際、メッセージは処理のため中国本土へ送信されますのでご留意ください。措置の詳細はお問い合わせください。</p>
         </div>

@@ -115,13 +115,30 @@
         }
 
     
+
+        /* Default: Apple only. Android App/UA injects platform-android to show Google. */
+        .store-google { display: none !important; }
+        html.platform-android .store-google { display: revert !important; }
+        html.platform-android .store-apple { display: none !important; }
+
     </style>
+
+
+<script>
+(function () {
+  var html = document.documentElement;
+  if (html.classList.contains('platform-ios') || html.classList.contains('platform-android')) return;
+  var ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) html.classList.add('platform-android');
+  else html.classList.add('platform-ios');
+})();
+</script>
 </head>
 <body>
 
     <div class="container">
         <h1>Stella AI · Auto-Renewal Service Agreement</h1>
-        <p class="meta">Updated: September 15, 2026 | Effective: September 15, 2026</p>
+        <p class="meta">Updated: November 25, 2026 | Effective: November 25, 2026</p>
         <p class="meta" style="margin-top: -12px; margin-bottom: 20px; font-size: 12px;">International Version: applies to users outside mainland China. The English version prevails; other language versions are for reference only. For users in mainland China, the Simplified Chinese version applies.</p>
 
         <div class="intro">
@@ -132,22 +149,24 @@
         <div class="section">
             <h2>1. Service Description</h2>
             <h3>1.1 Auto-renewal service</h3>
-            <p>Auto-renewal means: after you buy an auto-renewing subscription through the Apple App Store, unless you cancel at least 24 hours before the current period ends, the system renews and charges you automatically so membership continues without interruption.</p>
+            <p class="store-apple">Auto-renewal means: after you buy an auto-renewing subscription through the Apple App Store, unless you cancel at least 24 hours before the current period ends, the system renews and charges you automatically so membership continues without interruption.</p>
+            <p class="store-google">Auto-renewal means: after you buy an auto-renewing subscription through Google Play, unless you cancel at least 24 hours before the current period ends, the system renews and charges you automatically so membership continues without interruption.</p>
 
             <h3>1.2 Plans</h3>
-            <p>The App currently offers these auto-renewing subscriptions (see App Store for details):</p>
+            <p>The App currently offers these auto-renewing subscriptions (see the store page for your platform for details):</p>
             <ul>
                 <li><strong>Light monthly:</strong> 1-month period</li>
                 <li><strong>Deep monthly:</strong> 1-month period</li>
                 <li><strong>Yearly:</strong> 1-year period (all Deep benefits)</li>
             </ul>
-            <p>Price, benefits, and promotions are as shown in the App Store and in the App at purchase.</p>
+            <p>Price, currency, benefits, and promotions are as shown in the relevant store and in the App at purchase.</p>
 
             <h3>1.3 Renewal rules</h3>
             <ul>
                 <li>Renewal period matches the plan you chose</li>
-                <li>Renewal price is the price shown on the App Store at renewal</li>
-                <li>If prices change, Apple’s rules apply for notice; you may cancel before the change takes effect</li>
+                <li>Renewal price is the price shown on the relevant store at renewal</li>
+                <li class="store-apple">If prices change, Apple’s rules apply for notice; you may cancel before the change takes effect</li>
+                <li class="store-google">If prices change, Google’s rules apply for notice; you may cancel before the change takes effect</li>
             </ul>
         </div>
 
@@ -155,13 +174,15 @@
             <h2>2. Billing</h2>
             <h3>2.1 Timing</h3>
             <ul>
-                <li>Initial purchase is charged to your Apple ID immediately upon confirmation</li>
+                <li class="store-apple">Initial purchase is charged to your Apple ID immediately upon confirmation</li>
+                <li class="store-google">Initial purchase is charged to your Google account immediately upon confirmation</li>
                 <li>Auto-renewal charges within 24 hours before the current period ends</li>
-                <li>Exact charge time is determined by Apple; we cannot control the precise moment</li>
+                <li>Exact charge time is determined by the store; we cannot control the precise moment</li>
             </ul>
             <h3>2.2 Payment method</h3>
             <ul>
-                <li>Charges use the payment method linked to your Apple ID and are processed by Apple</li>
+                <li class="store-apple">Charges use the payment method linked to your Apple ID and are processed by Apple</li>
+                <li class="store-google">Charges use the payment method linked to your Google account and are processed by Google</li>
                 <li>We cannot access your card, payment passwords, or other payment credentials</li>
                 <li>If renewal payment fails, membership ends when the current paid period expires</li>
             </ul>
@@ -177,8 +198,8 @@
             <h3>3.1 How to cancel</h3>
             <p>You may cancel auto-renewal anytime, for example:</p>
             <ul>
-                <li>iPhone Settings → Apple ID → Subscriptions → Stella AI → Cancel Subscription</li>
-                <li>Or via App Store account subscription management</li>
+                <li class="store-apple">Settings → Apple ID → Subscriptions → Stella AI → Cancel Subscription; or via App Store account subscription management</li>
+                <li class="store-google">Google Play → Payments &amp; subscriptions → Subscriptions → Stella AI → Cancel; or tap “Manage subscription” in the App when membership is active</li>
             </ul>
             <h3>3.2 Rules after canceling</h3>
             <ul>
@@ -191,18 +212,21 @@
         <div class="section">
             <h2>4. Subscription and account binding</h2>
             <ul>
-                <li>Purchase is via Apple ID and binds on our servers to your currently signed-in Stella AI account</li>
-                <li><span class="highlight">One Apple subscription typically binds to only one Stella AI account</span></li>
-                <li>Use “Restore purchases” in the App to restore valid subscriptions via Apple ID, subject to binding rules</li>
+                <li>Purchase is via the relevant store account and binds on our servers to your currently signed-in Stella AI account</li>
+                <li class="store-apple"><span class="highlight">One App Store subscription typically binds to only one Stella AI account</span></li>
+                <li class="store-google"><span class="highlight">One Google Play subscription typically binds to only one Stella AI account</span></li>
+                <li>Use “Restore purchases” in the App to restore valid subscriptions via the store account on your device, subject to binding rules</li>
+                <li>Manage, cancel, or restore a subscription under the same platform and store account used for purchase</li>
             </ul>
         </div>
 
         <div class="section">
             <h2>5. Refunds</h2>
             <ul>
-                <li>Under Apple policy, App Store subscription charges are generally non-refundable except where law requires</li>
-                <li>Request refunds via Apple (e.g. <a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>); Apple reviews requests</li>
-                <li>We cannot process App Store refunds directly</li>
+                <li>Store subscription charges are generally non-refundable except where law requires, subject to the relevant store’s refund rules</li>
+                <li class="store-apple">App Store refunds: request via <a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener">reportaproblem.apple.com</a>; Apple reviews requests</li>
+                <li class="store-google">Google Play refunds: request via Google Play Help or the orders and subscriptions section of your Google account; Google reviews requests</li>
+                <li>We cannot process store refunds directly</li>
             </ul>
         </div>
 
@@ -210,13 +234,15 @@
             <h2>6. Changes and interruptions</h2>
             <ul>
                 <li>We may adjust subscription benefits as the product evolves; material changes will be communicated in the App or other applicable channels</li>
-                <li>Outages from network, maintenance, Apple service issues, or force majeure: we will use reasonable efforts to restore service but do not guarantee zero interruption</li>
+                <li class="store-apple">Outages from network, maintenance, Apple service issues, or force majeure: we will use reasonable efforts to restore service but do not guarantee zero interruption</li>
+                <li class="store-google">Outages from network, maintenance, Google service issues, or force majeure: we will use reasonable efforts to restore service but do not guarantee zero interruption</li>
             </ul>
         </div>
 
         <div class="section">
             <h2>7. Relationship to other agreements</h2>
-            <p>This Agreement supplements the User Agreement on auto-renewal. Unaddressed matters are governed by the User Agreement, Privacy Policy, and Apple terms. Where applicable, Apple standard EULA: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a></p>
+            <p class="store-apple">This Agreement supplements the User Agreement on auto-renewal. Unaddressed matters are governed by the User Agreement, Privacy Policy, and App Store terms. Where applicable, Apple standard EULA: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a>.</p>
+            <p class="store-google">This Agreement supplements the User Agreement on auto-renewal. Unaddressed matters are governed by the User Agreement, Privacy Policy, and Google Play terms as published by Google.</p>
         </div>
 
         <div class="section">

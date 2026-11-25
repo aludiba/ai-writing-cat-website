@@ -114,17 +114,34 @@
             h2 { font-size: 17px; }
         }
 
+
+        /* 默认仅展示 Apple；Android 设备/App 注入 platform-android 后切换为 Google */
+        .store-google { display: none !important; }
+        html.platform-android .store-google { display: revert !important; }
+        html.platform-android .store-apple { display: none !important; }
+
     </style>
+
+
+<script>
+(function () {
+  var html = document.documentElement;
+  if (html.classList.contains('platform-ios') || html.classList.contains('platform-android')) return;
+  var ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) html.classList.add('platform-android');
+  else html.classList.add('platform-ios');
+})();
+</script>
 </head>
 <body>
 
     <div class="container">
         <h1>星恋AI · 隐私政策</h1>
-        <p class="meta">更新日期：2026年11月5日　|　生效日期：2026年11月5日</p>
+        <p class="meta">更新日期：2026年11月25日　|　生效日期：2026年11月25日</p>
 
         <div class="intro">
             <p>星恋AI（以下简称"本应用"或"我们"）是一款 AI 虚拟角色情感陪伴与对话应用。我们深知个人信息对您的重要性，并严格遵循《中华人民共和国网络安全法》《中华人民共和国个人信息保护法》《中华人民共和国数据安全法》等法律法规，制定本隐私政策。</p>
-            <p>请您在使用本应用前仔细阅读并充分理解本政策全部内容，<span class="highlight">尤其是关于对话内容发送至第三方 AI 模型、位置信息用于天气、相机与相册权限、账号注销与密码重置机制的说明</span>。如您不同意本政策，请立即停止使用本应用。</p>
+            <p>请您在使用本应用前仔细阅读并充分理解本政策全部内容，<span class="highlight">尤其是关于对话内容发送至第三方 AI 模型、位置信息用于天气、相机与相册权限、订阅与交易信息、内容举报、账号注销与密码重置机制的说明</span>。如您不同意本政策，请立即停止使用本应用。</p>
         </div>
 
         <div class="section">
@@ -160,17 +177,24 @@
             </ul>
             <h3>5. 订阅与交易信息</h3>
             <ul>
-                <li>Apple 内购的交易凭证、原始交易标识（original transaction id）</li>
-                <li>订阅产品标识、订阅状态、到期时间、自动续订状态</li>
-                <li>我们<strong>不会</strong>收集您的 Apple ID 账号密码、银行卡号、支付密码等支付凭证，支付全流程由 Apple 完成</li>
+                <li class="store-apple">App Store 内购交易标识：交易凭证与原始交易标识（original transaction id）</li>
+                <li class="store-google">Google Play 内购交易标识：购买凭证（purchaseToken）及用于账号绑定的混淆账户标识（obfuscated account id，对应您的星恋AI 用户标识）</li>
+                <li>订阅产品标识、订阅状态、到期时间、自动续订状态、购买平台</li>
+                <li class="store-apple">我们<strong>不会</strong>收集您的 Apple ID 密码、银行卡号、支付密码等支付凭证，支付全流程由 Apple 完成</li>
+                <li class="store-google">我们<strong>不会</strong>收集您的 Google 账户密码、银行卡号、支付密码等支付凭证，支付全流程由 Google 完成</li>
             </ul>
-            <h3>6. 设备与日志信息</h3>
+            <h3>6. 内容举报信息</h3>
+            <ul>
+                <li>当您长按 AI 消息并提交举报时，我们会收集：被举报消息文本、举报原因、消息时间、会话标识、角色类型与角色名（如有）、应用版本与设备平台</li>
+                <li>上述信息用于内容审核、安全处置与纠纷处理，并与您的用户标识关联存储于云端</li>
+            </ul>
+            <h3>7. 设备与日志信息</h3>
             <ul>
                 <li>设备型号、操作系统版本、应用版本号、系统语言与时区（用于适配界面与定时通知）</li>
                 <li>网络状态、访问 IP 地址（由服务端在处理请求时自动记录）</li>
                 <li>崩溃与错误日志、接口调用失败记录，用于排障与改进稳定性</li>
             </ul>
-            <h3>7. 我们不收集的信息</h3>
+            <h3>8. 我们不收集的信息</h3>
             <ul>
                 <li>不收集通讯录、短信、通话记录</li>
                 <li>不收集录音或麦克风数据（本应用当前不含语音功能）</li>
@@ -195,7 +219,8 @@
             <h3>3. 安全与合规</h3>
             <ul>
                 <li>识别与防范异常登录、恶意刷取额度、破解与滥用行为</li>
-                <li>保障服务与交易安全，处理投诉与纠纷</li>
+                <li>保障服务与交易安全，处理投诉、举报与纠纷</li>
+                <li>对 AI 生成内容进行本地安全过滤，降低不当内容风险</li>
                 <li>遵守法律法规与监管部门的合法要求</li>
             </ul>
             <h3>4. 改进服务</h3>
@@ -207,9 +232,9 @@
             <h3>1. 存储位置</h3>
             <ul>
                 <li><strong>本地存储（您的设备）：</strong>聊天记录、角色设定、心情记录、回忆条目、关系与章节进度、应用偏好设置、天气缓存、权益缓存等，均保存在设备本地数据库与本地偏好存储中</li>
-                <li><strong>云端存储：</strong>仅包含账号信息（邮箱、加密后的密码、用户标识）、头像文件、订阅权益记录</li>
-                <li><strong>存储地点：</strong>云端数据（账号信息、头像、订阅记录）存储于 Supabase 提供的云服务，服务器位于印度（Amazon Web Services 孟买区域）；AI 对话请求经我们部署在阿里云的服务端中转，由位于中国境内的 DeepSeek 处理</li>
-                <li><strong>个人信息出境说明：</strong>上述云端数据存储于境外，属于个人信息出境。我们仅传输实现账号、头像与订阅功能所必需的信息，并采取加密传输、访问控制等保护措施；您可通过本政策第五节所列方式向我们行使查阅、更正、删除等权利</li>
+                <li><strong>云端存储：</strong>账号信息（邮箱、加密后的密码、用户标识）、头像文件、订阅权益记录，以及您主动提交的内容举报记录</li>
+                <li><strong>存储地点：</strong>云端数据（账号信息、头像、订阅记录、举报记录）存储于 Supabase 提供的云服务，服务器位于印度（Amazon Web Services 孟买区域）；AI 对话请求经我们部署在阿里云的服务端中转，由位于中国境内的 DeepSeek 处理</li>
+                <li><strong>个人信息出境说明：</strong>上述云端数据存储于境外，属于个人信息出境。我们仅传输实现账号、头像、订阅与内容安全功能所必需的信息，并采取加密传输、访问控制等保护措施；您可通过本政策第五节所列方式向我们行使查阅、更正、删除等权利</li>
             </ul>
             <h3>2. 聊天内容的存储说明（重要）</h3>
             <p><span class="highlight">您与 AI 角色的聊天记录默认仅保存在您的设备本地，我们的服务器不保存聊天正文。</span>但在您于应用内同意 AI 数据共享后，生成回复时您发送的消息、必要的上下文与角色设定会实时传输至第三方 AI 模型服务用于推理（详见第四节）。这也意味着：卸载应用、清除数据或更换设备可能导致本地聊天记录不可恢复，请您知悉。</p>
@@ -218,6 +243,7 @@
                 <li>账号信息：自注册起至您注销账号时删除</li>
                 <li>头像文件：自上传起至您更换或注销账号时删除</li>
                 <li>订阅记录：在订阅有效期内保存；为满足财税与合规要求，交易记录可能在法定期限内保留</li>
+                <li>内容举报记录：为实现审核与安全处置之目的合理保存，处理完毕后按内部期限删除或匿名化，法律另有规定的除外</li>
                 <li>本地数据：保存在您的设备上，直至您在应用内删除、注销账号或卸载应用</li>
                 <li>日志信息：一般保留不超过 6 个月，法律另有规定的除外</li>
             </ul>
@@ -249,16 +275,26 @@
             </ul>
             <h4>• 云服务提供商（Supabase）</h4>
             <ul>
-                <li><strong>共享内容：</strong>邮箱、加密密码、用户标识、头像文件、订阅权益记录</li>
-                <li><strong>目的：</strong>提供账号认证、文件存储与订阅状态同步</li>
+                <li><strong>共享内容：</strong>邮箱、加密密码、用户标识、头像文件、订阅权益记录、内容举报记录</li>
+                <li><strong>目的：</strong>提供账号认证、文件存储、订阅状态同步与内容安全处置</li>
                 <li><strong>存储地点：</strong>印度（Amazon Web Services 孟买区域），属于个人信息出境</li>
             </ul>
+            <div class="store-apple">
             <h4>• Apple 公司</h4>
             <ul>
                 <li><strong>共享内容：</strong>内购与订阅请求、交易凭证、恢复购买请求</li>
                 <li><strong>目的：</strong>完成支付、订阅管理、权益校验与恢复；Apple 的隐私政策适用于该等数据</li>
                 <li><strong>订阅校验：</strong>我们在 Supabase 上的后端会将交易编号及 Apple 签名的订阅通知发送至我们部署在阿里云的校验服务，由其向 Apple 查询订阅状态后返回；校验服务不保存上述数据，订阅与账号的绑定记录保存在 Supabase</li>
             </ul>
+            </div>
+            <div class="store-google">
+            <h4>• Google 公司</h4>
+            <ul>
+                <li><strong>共享内容：</strong>Google Play 结算请求、购买凭证（purchaseToken）、恢复购买相关信息</li>
+                <li><strong>目的：</strong>完成支付、订阅管理、权益校验与恢复；Google 的隐私政策适用于该等数据</li>
+                <li><strong>订阅校验：</strong>我们的服务端可能使用购买凭证向 Google Play Developer API 查询订阅状态；订阅与账号的绑定记录保存在 Supabase</li>
+            </ul>
+            </div>
             <h4>• 天气与地理信息服务（Open-Meteo、BigDataCloud）</h4>
             <ul>
                 <li><strong>共享内容：</strong>经您授权获取的经纬度坐标</li>
@@ -288,7 +324,8 @@
             <h3>4. 撤回同意</h3>
             <ul>
                 <li><strong>AI 数据共享：</strong>在"设置 → 隐私 → 允许 AI 数据共享"中关闭，关闭后不再向第三方 AI 发送您的数据</li>
-                <li><strong>定位：</strong>iPhone 设置 → 隐私与安全性 → 定位服务 → 星恋AI，可随时关闭</li>
+                <li class="store-apple"><strong>定位：</strong>在系统设置中关闭本应用的定位权限（设置 → 隐私与安全性 → 定位服务）</li>
+                <li class="store-google"><strong>定位：</strong>在系统设置中关闭本应用的定位权限（设置 → 应用 → 星恋AI → 权限）</li>
                 <li><strong>相机 / 相册：</strong>在系统设置中随时撤销授权</li>
                 <li><strong>通知：</strong>在应用内设置或系统通知设置中关闭</li>
             </ul>
@@ -299,7 +336,7 @@
 
         <div class="section">
             <h2>六、未成年人保护</h2>
-            <p>本应用为面向成年人的 AI 情感陪伴类服务，<span class="highlight">不向未成年人提供虚拟伴侣、虚拟亲密关系服务</span>。我们不会有意收集未成年人的个人信息。</p>
+            <p>本应用为面向成年人的 AI 情感陪伴类服务，内置角色均为成年人设定，<span class="highlight">不向未成年人提供虚拟伴侣、虚拟亲密关系服务</span>。我们不会有意收集未成年人的个人信息。</p>
             <ul>
                 <li>如您未满 18 周岁，请勿注册或使用本应用。</li>
                 <li>如我们发现在未取得监护人同意的情况下收集了未成年人的个人信息，将尽快删除相关数据并关闭账号。</li>
@@ -319,7 +356,8 @@
 
         <div class="section">
             <h2>八、第三方链接</h2>
-            <p>本应用可能包含指向第三方网站或服务的链接（如 App Store、Apple 订阅管理页）。我们不对第三方的隐私实践负责，建议您在使用前阅读其隐私政策。</p>
+            <p class="store-apple">本应用可能包含指向第三方网站或服务的链接（如 App Store 与订阅管理页）。我们不对第三方的隐私实践负责，建议您在使用前阅读其隐私政策。</p>
+            <p class="store-google">本应用可能包含指向第三方网站或服务的链接（如 Google Play 与订阅管理页）。我们不对第三方的隐私实践负责，建议您在使用前阅读其隐私政策。</p>
         </div>
 
         <div class="section">
